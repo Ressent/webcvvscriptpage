@@ -16,32 +16,59 @@
 <header>
   <div class="container header-flex">
     <div class="logo-area">
-      <!-- Logo desde Google (ejemplo) -->
-      <img src="https://i.imgur.com/ikHQycd.png" 
-           alt="Logo Iglesia" 
-           class="logo-svg"
-           style="border-radius: 50%; width: 70px; height: 70px; object-fit: cover; border: 3px solid #e07c4c;">
+      <!-- Logo con círculo parpadeante -->
+      <div class="logo-container">
+        <img src="file:///C:/Users/hpvid/Downloads/7EDEC6A7-5C93-44F4-8A94-AE85C918906D_Original-removebg-preview.png" 
+             alt="Logo Iglesia" 
+             class="logo-svg">
+        <div class="pulse-circle"></div>
+      </div>
       <div class="logo-text">
-        <h1>Camino, Verdad y Vida</h1>
-        <span>Gral. Alvear</span>
+        <h1 class="glowing-text">Camino, Verdad y Vida</h1>
+        <span class="vivo-color">Gral. Alvear</span>
       </div>
     </div>
     <nav class="nav-links" id="mainNav">
-      <a href="#inicio" class="active">Inicio</a>
-      <a href="#reuniones">Reuniones</a>
-      <a href="#redes">Redes</a>
-      <a href="#contacto">Contacto</a>
+      <a href="#inicio" class="active" data-section="inicio">Inicio</a>
+      <a href="#reuniones" data-section="reuniones">Reuniones</a>
+      <a href="#redes" data-section="redes">Redes</a>
+      <a href="#contacto" data-section="contacto">Contacto</a>
     </nav>
   </div>
 </header>
 
 <!-- SECCIÓN INICIO -->
-<section id="inicio" class="hero">
+<section id="inicio" class="section section-light section-active">
   <div class="container">
-    <h2>Iglesia Cristiana<br>Camino, Verdad y Vida</h2>
-    <div class="hero-accent"></i> Sección - Redes y Multimedia </i></div>
-    <p> 📌 Bienvenido a nuestra sección de Redes y Multimedia.</p>
-    <p>Estamos trabajando en esta página para brindarte información actualizada sobre nuestros próximos eventos, redes sociales y horarios de reuniones.</p>
+    <!-- Cartel de Bienvenidos MEJORADO (una línea) -->
+    <div class="welcome-banner">
+      <h2 class="elegant-title">
+        ¡HOLA! Bienvenidos a <span class="highlight">Camino, Verdad y Vida</span> <span class="alvear">Gral. Alvear</span>
+      </h2>
+      <div class="stars-decoration">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+      </div>
+    </div>
+    
+    <!-- Lema con colores suaves -->
+    <div class="lema-container">
+      <p class="lema-text-soft">#SOMOSFAMILIA · #SOMOSIGLESIA</p>
+    </div>
+    
+    <!-- Sección ¿Quiénes Somos? -->
+    <div class="quienes-somos">
+      <div class="quienes-img">
+        <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=600&h=400&fit=crop" alt="Familia en iglesia">
+      </div>
+      <div class="quienes-content">
+        <h3>¿Quiénes Somos?</h3>
+        <p>Somos una familia de fe que se reúne para adorar a Dios, crecer en su Palabra y compartir su amor con nuestra comunidad. En <strong>Camino, Verdad y Vida</strong> encontrarás un lugar donde ser bienvenido, amado y desafiado a seguir a Jesús.</p>
+        <p>Nuestra misión es llevar el mensaje de esperanza a cada persona, acompañándolas en su camino de fe y sirviendo a nuestra ciudad con amor y dedicación.</p>
+        <p><i class="fas fa-heart" style="color: var(--coral);"></i> ¡Te esperamos!</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -141,5 +168,4 @@
 <!-- Script principal -->
 <script src="script.js"></script>
 </body>
-
 </html>
