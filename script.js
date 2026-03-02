@@ -22,8 +22,8 @@ const eventosData = [
     lugar: "Rio Mendoza 554",
     descripcion: "Reunión General de Miércoles",
     imagen: "https://i.pinimg.com/736x/e7/19/1b/e7191bf84e8235e4c3fa0757b72c8203.jpg",
-    fechaInicio: "2026-03-02T19:15:00",
-    fechaFin: "2026-03-02T19:25:00",
+    fechaInicio: "2026-03-02T19:20:00",
+    fechaFin: "2026-03-02T19:30:00",
     etiqueta: ""
   },
   {
@@ -683,6 +683,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   setTimeout(verificarNotificaciones, 2000);
 });
+
 
 
 
