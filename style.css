@@ -543,3 +543,630 @@ footer {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* ===== NUEVAS ANIMACIONES Y ESTILOS ===== */
+
+/* Círculo pulsante */
+.logo-container {
+  position: relative;
+  display: inline-block;
+}
+
+.pulse-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(224, 124, 76, 0.3);
+  animation: pulse 2s infinite;
+  z-index: 1;
+}
+
+.logo-svg {
+  position: relative;
+  z-index: 2;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--coral);
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.7;
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(1.3);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Texto con brillo */
+.glowing-text {
+  font-size: 1.8rem;
+  color: white;
+  text-shadow: 0 0 5px rgba(224, 124, 76, 0.5);
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px rgba(224, 124, 76, 0.5);
+  }
+  to {
+    text-shadow: 0 0 15px rgba(224, 124, 76, 0.9), 0 0 20px rgba(224, 124, 76, 0.5);
+  }
+}
+
+/* Color vivo para Gral. Alvear */
+.vivo-color {
+  font-size: 0.9rem;
+  background: var(--coral);
+  color: white;
+  padding: 0.2rem 1rem;
+  border-radius: 30px;
+  font-weight: 600;
+  display: inline-block;
+  animation: color-change 3s infinite;
+  box-shadow: 0 0 10px rgba(224, 124, 76, 0.7);
+}
+
+@keyframes color-change {
+  0% { background-color: var(--coral); }
+  50% { background-color: #f0a500; }
+  100% { background-color: var(--coral); }
+}
+
+/* Banner de bienvenida ELEGANTE */
+.welcome-banner {
+  text-align: center;
+  margin: 2rem 0 2.5rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #ffffff, #f9f9f9);
+  border-radius: 50px 15px 50px 15px;
+  box-shadow: 0 10px 25px -8px rgba(15, 59, 79, 0.15);
+  border: 2px solid rgba(224, 124, 76, 0.3);
+}
+
+.elegant-title {
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--navy);
+  margin-bottom: 0.8rem;
+  font-family: 'Playfair Display', serif;
+  line-height: 1.4;
+}
+
+.elegant-title .highlight {
+  font-weight: 700;
+  color: var(--teal);
+  position: relative;
+  display: inline-block;
+}
+
+.elegant-title .highlight::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--coral);
+  opacity: 0.5;
+}
+
+.elegant-title .alvear {
+  font-weight: 600;
+  color: var(--coral);
+  font-style: italic;
+}
+
+.stars-decoration {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.stars-decoration i {
+  color: var(--coral);
+  font-size: 1.2rem;
+  opacity: 0.7;
+  animation: float 3s infinite ease-in-out;
+}
+
+.stars-decoration i:nth-child(2) {
+  animation-delay: 0.2s;
+  color: var(--teal);
+}
+
+.stars-decoration i:nth-child(3) {
+  animation-delay: 0.4s;
+  color: var(--navy);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Lema con colores SUAVES y llamativos (sin neón) */
+.lema-container {
+  text-align: center;
+  margin: 2.5rem 0 3rem;
+  padding: 1rem;
+}
+
+.lema-text-soft {
+  font-size: 2.2rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  font-family: 'Playfair Display', serif;
+  background: linear-gradient(135deg, #4a90e2, #6ab04c, #f39c12);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-soft 8s ease infinite;
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  border-radius: 50px;
+  background-color: rgba(255,255,255,0.5);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+@keyframes gradient-soft {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Sección ¿Quiénes Somos? */
+.quienes-somos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin: 3rem 0;
+  background: white;
+  border-radius: 30px 8px 30px 8px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px -15px rgba(15, 59, 79, 0.3);
+  border: 3px solid var(--teal);
+}
+
+.quienes-img {
+  height: 100%;
+  min-height: 400px;
+  overflow: hidden;
+}
+
+.quienes-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.quienes-img img:hover {
+  transform: scale(1.05);
+}
+
+.quienes-content {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.quienes-content h3 {
+  font-size: 2.5rem;
+  color: var(--navy);
+  margin-bottom: 1.5rem;
+  border-bottom: 4px solid var(--coral);
+  display: inline-block;
+  padding-bottom: 0.5rem;
+}
+
+.quienes-content p {
+  font-size: 1.2rem;
+  color: #345f6e;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+/* Secciones separadas - solo una visible a la vez */
+.section {
+  display: none;
+  padding: 4rem 0;
+}
+
+.section.section-active {
+  display: block;
+}
+
+/* Responsive para quienes-somos */
+@media (max-width: 700px) {
+  .quienes-somos {
+    grid-template-columns: 1fr;
+  }
+  
+  .quienes-img {
+    min-height: 250px;
+  }
+  
+  .quienes-content {
+    padding: 2rem;
+  }
+  
+  .blinking-text {
+    font-size: 1.8rem;
+  }
+  
+  .lema-text {
+    font-size: 1.5rem;
+  }
+}
+
+/* ===== BOTÓN COMPARTIR ===== */
+.btn-compartir {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, var(--teal), var(--navy));
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 1rem;
+  border: 2px solid transparent;
+  box-shadow: 0 4px 10px rgba(15, 59, 79, 0.2);
+  width: 100%;
+  justify-content: center;
+}
+
+.btn-compartir:hover {
+  background: linear-gradient(135deg, var(--navy), var(--teal));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(224, 124, 76, 0.3);
+  border-color: var(--coral);
+}
+
+.btn-compartir i {
+  font-size: 1rem;
+}
+
+/* ===== EVENTO DESTACADO DESDE LINK ===== */
+.evento-destacado {
+  animation: destacado-pulse 2s ease;
+  box-shadow: 0 0 0 4px var(--coral), 0 15px 30px -10px var(--navy) !important;
+  transform: scale(1.02);
+  z-index: 100;
+  position: relative;
+  transition: all 0.3s;
+}
+
+@keyframes destacado-pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--coral), 0 15px 30px -10px var(--navy);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(224, 124, 76, 0.3), 0 15px 30px -10px var(--navy);
+  }
+  100% {
+    box-shadow: 0 0 0 0 var(--coral), 0 15px 30px -10px var(--navy);
+  }
+}
+
+/* ===== NOTIFICACIÓN AL COMPARTIR ===== */
+.notificacion-compartir {
+  position: fixed;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--navy);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  z-index: 9999;
+  transition: bottom 0.3s ease;
+  font-weight: 500;
+  border-left: 6px solid var(--coral);
+  font-size: 1rem;
+  min-width: 250px;
+  text-align: center;
+}
+
+.notificacion-compartir.show {
+  bottom: 30px;
+}
+
+/* Ajuste para que el botón compartir no rompa el diseño en móvil */
+@media (max-width: 700px) {
+  .btn-compartir {
+    padding: 0.8rem;
+    font-size: 1rem;
+  }
+  
+  .notificacion-compartir {
+    width: 90%;
+    font-size: 0.9rem;
+    padding: 0.8rem;
+    min-width: auto;
+  }
+}
+
+/* ===== BOTONES DE ACCIÓN EN EVENTOS ===== */
+.event-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-compartir, .btn-seguir {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: 2px solid transparent;
+}
+
+.btn-compartir {
+  background: linear-gradient(135deg, var(--teal), var(--navy));
+  color: white;
+  box-shadow: 0 4px 10px rgba(15, 59, 79, 0.2);
+}
+
+.btn-compartir:hover {
+  background: linear-gradient(135deg, var(--navy), var(--teal));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(224, 124, 76, 0.3);
+  border-color: var(--coral);
+}
+
+.btn-seguir {
+  background: white;
+  color: var(--navy);
+  border: 2px solid var(--teal);
+}
+
+.btn-seguir:hover {
+  background: var(--light-teal);
+  border-color: var(--coral);
+}
+
+.btn-seguir.siguiendo {
+  background: var(--teal);
+  color: white;
+  border-color: var(--coral);
+}
+
+.btn-seguir.siguiendo:hover {
+  background: var(--navy);
+}
+
+.btn-seguir i, .btn-compartir i {
+  font-size: 1rem;
+}
+
+/* ===== MODAL PARA SEGUIMIENTO ===== */
+.modal-seguimiento {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal-seguimiento.show {
+  opacity: 1;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 30px 8px 30px 8px;
+  max-width: 400px;
+  width: 90%;
+  position: relative;
+  border: 4px solid var(--coral);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.modal-seguimiento.show .modal-content {
+  transform: scale(1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--navy);
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: var(--coral);
+}
+
+.modal-content h3 {
+  font-size: 1.8rem;
+  color: var(--navy);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.modal-content h3 i {
+  color: var(--coral);
+}
+
+.modal-content p {
+  color: #345f6e;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid var(--teal);
+  border-radius: 30px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  transition: border-color 0.3s;
+}
+
+.modal-content input:focus {
+  outline: none;
+  border-color: var(--coral);
+}
+
+.modal-content button {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, var(--coral), var(--navy));
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.modal-content button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(224, 124, 76, 0.3);
+}
+
+/* ===== NOTIFICACIONES MEJORADAS ===== */
+.notificacion-compartir {
+  position: fixed;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  z-index: 9999;
+  transition: bottom 0.3s ease;
+  font-weight: 500;
+  font-size: 1rem;
+  min-width: 300px;
+  text-align: center;
+}
+
+.notificacion-success {
+  background: var(--navy);
+  border-left: 6px solid var(--verde);
+}
+
+.notificacion-error {
+  background: var(--navy);
+  border-left: 6px solid var(--rojo);
+}
+
+.notificacion-info {
+  background: var(--navy);
+  border-left: 6px solid var(--teal);
+}
+
+.notificacion-compartir.show {
+  bottom: 30px;
+}
+
+/* ===== EVENTO DESTACADO ===== */
+.evento-destacado {
+  animation: destacado-pulse 2s ease;
+  box-shadow: 0 0 0 4px var(--coral), 0 15px 30px -10px var(--navy) !important;
+  transform: scale(1.02);
+  z-index: 100;
+  position: relative;
+}
+
+@keyframes destacado-pulse {
+  0% { box-shadow: 0 0 0 0 var(--coral), 0 15px 30px -10px var(--navy); }
+  50% { box-shadow: 0 0 0 10px rgba(224, 124, 76, 0.3), 0 15px 30px -10px var(--navy); }
+  100% { box-shadow: 0 0 0 0 var(--coral), 0 15px 30px -10px var(--navy); }
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .event-actions {
+    flex-direction: column;
+  }
+  
+  .btn-compartir, .btn-seguir {
+    width: 100%;
+    padding: 0.8rem;
+  }
+  
+  .notificacion-compartir {
+    width: 90%;
+    min-width: auto;
+    font-size: 0.9rem;
+    padding: 0.8rem;
+  }
+  
+  .modal-content {
+    padding: 1.5rem;
+  }
+  
+  .modal-content h3 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Mejora para el modal */
+.modal-content p i.fa-info-circle {
+  margin-right: 5px;
+}
+
+.modal-content input[type="email"] {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid var(--teal);
+  border-radius: 30px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  transition: border-color 0.3s;
+}
+
+.modal-content input[type="email"]:focus {
+  outline: none;
+  border-color: var(--coral);
+}
