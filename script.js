@@ -22,8 +22,8 @@ const eventosData = [
     lugar: "Rio Mendoza 554",
     descripcion: "Reunión General de Miércoles",
     imagen: "https://i.pinimg.com/736x/e7/19/1b/e7191bf84e8235e4c3fa0757b72c8203.jpg",
-    fechaInicio: "2026-03-02T19:20:00",
-    fechaFin: "2026-03-02T19:30:00",
+    fechaInicio: null,
+    fechaFin: null,
     etiqueta: ""
   },
   {
@@ -77,12 +77,19 @@ function isEventoSeguido(eventoId) {
   return !!eventosSeguidos[eventoId];
 }
 
-// Seguir un evento
+// Seguir un evento (VERSIÓN MEJORADA - guarda TODOS los datos)
 function seguirEvento(eventoId, eventoTitulo, fechaInicio, email) {
+  // Buscar el evento completo para guardar todos sus datos
+  const eventoCompleto = eventosData.find(e => e.id === eventoId);
+  
   eventosSeguidos[eventoId] = {
+    id: eventoId,
     titulo: eventoTitulo,
     fechaInicio: fechaInicio,
     email: email,
+    horario: eventoCompleto?.horario || '',
+    lugar: eventoCompleto?.lugar || '',
+    descripcion: eventoCompleto?.descripcion || '',
     notificadoInicio: false,
     notificadoFin: false
   };
@@ -107,7 +114,10 @@ function mostrarModalSeguimiento(eventoId, eventoTitulo, fechaInicio) {
     <div class="modal-content">
       <span class="modal-close">&times;</span>
       <h3><i class="fas fa-bell"></i> Seguir evento</h3>
-      <p>Recibirás notificaciones cuando <strong>${eventoTitulo}</strong> esté por comenzar y cuando finalice.</p>
+      <p>Recibirás notificaciones por email cuando <strong>${eventoTitulo}</strong> esté por comenzar y cuando finalice.</p>
+      <p style="font-size: 0.9rem; color: var(--coral); margin-bottom: 1rem;">
+        <i class="fas fa-info-circle"></i> ¡IMPORTANTE! COLOCA EL CORREO DE MANERA CORRECTA
+      </p>
       <input type="email" id="email-seguimiento" placeholder="tu@email.com" required>
       <button id="confirmar-seguimiento">Confirmar</button>
     </div>
@@ -163,62 +173,6 @@ function actualizarBotonSeguimiento(eventoId, siguiendo) {
       boton.innerHTML = '<i class="fas fa-bell"></i> Seguir';
       boton.classList.remove('siguiendo');
     }
-  }
-}
-
-// Verificar eventos para notificaciones (se ejecuta cada minuto)
-function verificarNotificaciones() {
-  const ahora = new Date();
-  
-  Object.keys(eventosSeguidos).forEach(eventoId => {
-    const seguido = eventosSeguidos[eventoId];
-    if (!seguido.fechaInicio) return;
-    
-    const fechaInicio = new Date(seguido.fechaInicio);
-    const fechaFin = new Date(seguido.fechaInicio);
-    fechaFin.setHours(fechaFin.getHours() + 3); // Asumimos 3hs de duración
-    
-    const quinceMinAntes = new Date(fechaInicio.getTime() - 15 * 60 * 1000);
-    
-    // Notificar 15 minutos antes
-    if (!seguido.notificadoInicio && ahora >= quinceMinAntes && ahora < fechaInicio) {
-      enviarNotificacionEmail(
-        seguido.email,
-        `⏰ ¡${seguido.titulo} comienza en 15 minutos!`,
-        `El evento comenzará a las ${fechaInicio.toLocaleTimeString()}. ¡Te esperamos!`
-      );
-      seguido.notificadoInicio = true;
-      guardarSeguimientos();
-    }
-    
-    // Notificar cuando finaliza
-    if (!seguido.notificadoFin && ahora >= fechaFin) {
-      enviarNotificacionEmail(
-        seguido.email,
-        `✅ ${seguido.titulo} ha finalizado`,
-        `Esperamos que hayas disfrutado del evento. ¡Seguinos para más actividades!`
-      );
-      seguido.notificadoFin = true;
-      guardarSeguimientos();
-      
-      // Opcional: dejar de seguir automáticamente después de finalizar
-      // dejarDeSeguirEvento(eventoId);
-    }
-  });
-}
-
-// Simular envío de email (en producción, esto se conectaría a un servicio real)
-function enviarNotificacionEmail(email, asunto, mensaje) {
-  console.log(`📧 Enviando email a ${email}`);
-  console.log(`Asunto: ${asunto}`);
-  console.log(`Mensaje: ${mensaje}`);
-  
-  // Aquí se conectaría con un servicio real como EmailJS, SendGrid, etc.
-  mostrarNotificacion(`📧 Notificación enviada a ${email}`, 'info');
-  
-  // Para pruebas, mostrar un alert simulado
-  if (confirm(`📧 SIMULACIÓN: Se enviaría email a ${email}\n\nAsunto: ${asunto}\n\n¿Abrir cliente de correo?`)) {
-    window.location.href = `mailto:${email}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(mensaje)}`;
   }
 }
 
@@ -288,7 +242,7 @@ function destacarEventoDesdeUrl() {
         
         const reunionesSection = document.getElementById('reuniones');
         if (reunionesSection && !reunionesSection.classList.contains('section-active')) {
-          mostrarSeccion('reuniones');
+          window.mostrarSeccion('reuniones');
         }
       } else {
         setTimeout(() => {
@@ -302,7 +256,7 @@ function destacarEventoDesdeUrl() {
             
             const reunionesSection = document.getElementById('reuniones');
             if (reunionesSection && !reunionesSection.classList.contains('section-active')) {
-              mostrarSeccion('reuniones');
+              window.mostrarSeccion('reuniones');
             }
           }
         }, 1000);
@@ -311,7 +265,7 @@ function destacarEventoDesdeUrl() {
   }
 }
 
-// ===== FUNCIONES PARA EVENTOS CON FECHAS =====
+// ===== FUNCIONES PARA EVENTOS CON FECHAS (CORREGIDAS) =====
 function formatearContador(ms) {
   if (ms <= 0) return null;
   
@@ -336,23 +290,46 @@ function getEstadoEvento(inicio, fin) {
   
   const ahora = new Date();
   const fechaInicio = new Date(inicio);
+  // Si no hay fecha de fin, establecer duración de 3 horas
   const fechaFin = fin ? new Date(fin) : new Date(fechaInicio.getTime() + 3 * 60 * 60 * 1000);
   
+  // DEBUG: Mostrar fechas en consola
+  console.log(`Verificando evento:`, {
+    inicio: fechaInicio.toLocaleString(),
+    fin: fechaFin.toLocaleString(),
+    ahora: ahora.toLocaleString()
+  });
+  
+  // Si ya terminó
   if (ahora > fechaFin) {
-    return { tipo: 'finalizado', texto: 'FINALIZADO' };
+    return { 
+      tipo: 'finalizado', 
+      texto: 'FINALIZADO'
+    };
   }
   
+  // Si está en curso (ahora está entre inicio y fin)
   if (ahora >= fechaInicio && ahora <= fechaFin) {
-    return { tipo: 'curso', texto: '🔴 EN CURSO' };
+    return { 
+      tipo: 'curso', 
+      texto: '🔴 EN CURSO'
+    };
   }
   
-  const tiempoRestante = fechaInicio - ahora;
-  const contador = formatearContador(tiempoRestante);
+  // Si falta para empezar
+  if (ahora < fechaInicio) {
+    const tiempoRestante = fechaInicio - ahora;
+    const contador = formatearContador(tiempoRestante);
+    return { 
+      tipo: 'proximo', 
+      texto: `⏳ Inicia en ${contador}`
+    };
+  }
   
-  return { tipo: 'proximo', texto: `⏳ Inicia en ${contador}` };
+  return { tipo: 'normal', texto: '' };
 }
 
-// ===== CARGAR EVENTOS (MODIFICADO para incluir botón seguir) =====
+// ===== CARGAR EVENTOS (CORREGIDO) =====
 function cargarEventos() {
   const container = document.getElementById('eventos-container');
   if (!container) return;
@@ -364,15 +341,21 @@ function cargarEventos() {
     card.className = 'event-card';
     card.setAttribute('data-evento-id', evento.id);
     
+    // Obtener estado del evento si tiene fecha
     let estado = { tipo: 'normal', texto: '' };
     if (evento.fechaInicio) {
       estado = getEstadoEvento(evento.fechaInicio, evento.fechaFin);
     }
     
+    // DEBUG: Mostrar estado del evento
+    console.log(`Evento ${evento.titulo}:`, estado);
+    
+    // Determinar qué etiqueta mostrar (manual o automática)
     let etiquetaTexto = '';
     let etiquetaClase = '';
     
     if (evento.etiqueta && evento.etiqueta !== "") {
+      // Usar etiqueta manual
       if (typeof evento.etiqueta === 'object') {
         etiquetaTexto = evento.etiqueta.texto;
         switch(evento.etiqueta.tipo) {
@@ -386,24 +369,26 @@ function cargarEventos() {
         etiquetaClase = 'etiqueta-rojo';
       }
     } else if (estado.texto) {
+      // Usar etiqueta automática del contador
       etiquetaTexto = estado.texto;
-      if (estado.tipo === 'finalizado') etiquetaClase = 'etiqueta-rojo';
-      else if (estado.tipo === 'curso') etiquetaClase = 'etiqueta-verde';
-      else if (estado.tipo === 'proximo') etiquetaClase = 'etiqueta-amarillo';
+      if (estado.tipo === 'finalizado') {
+        etiquetaClase = 'etiqueta-rojo';
+        card.classList.add('evento-finalizado');
+      } else if (estado.tipo === 'curso') {
+        etiquetaClase = 'etiqueta-verde';
+        card.classList.add('evento-curso'); // <-- ESTO ES LO QUE FALTABA
+      } else if (estado.tipo === 'proximo') {
+        etiquetaClase = 'etiqueta-amarillo';
+      }
     }
     
-    if (estado.tipo === 'finalizado') {
-      card.classList.add('evento-finalizado');
-    }
-    if (estado.tipo === 'curso') {
-      card.classList.add('evento-curso');
-    }
-    
+    // Generar etiqueta HTML
     let etiquetaHTML = '';
     if (etiquetaTexto) {
       etiquetaHTML = `<span class="etiqueta-evento ${etiquetaClase}">${etiquetaTexto}</span>`;
     }
     
+    // Formatear fecha
     let fechaInfo = '';
     if (evento.fechaInicio) {
       const fecha = new Date(evento.fechaInicio);
@@ -500,9 +485,9 @@ function initSeccionesSeparadas() {
 
 // ===== CONFIGURACIÓN DE EMAILJS =====
 const EMAILJS_CONFIG = {
-  PUBLIC_KEY: '8t7CaVy1RjdvKO2Nu',      // Reemplazar con tu Public Key
-  SERVICE_ID: 'service_4ngsl5i',       // Reemplazar con tu Service ID
-  TEMPLATE_ID: 'template_r1hiead'      // Reemplazar con tu Template ID
+  PUBLIC_KEY: '8t7CaVy1RjdvKO2Nu',      // Tu Public Key
+  SERVICE_ID: 'service_4ngsl5i',        // Tu Service ID
+  TEMPLATE_ID: 'template_9koprsq'       // Tu Template ID
 };
 
 // Cargar EmailJS dinámicamente
@@ -512,27 +497,38 @@ function cargarEmailJS() {
     script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
     script.onload = () => {
       emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
-      console.log('✅ EmailJS inicializado');
+      console.log('✅ EmailJS inicializado correctamente');
       resolve();
     };
-    script.onerror = reject;
+    script.onerror = (error) => {
+      console.error('❌ Error al cargar EmailJS:', error);
+      reject(error);
+    };
     document.head.appendChild(script);
   });
 }
 
 // Enviar notificación por email
 async function enviarNotificacionEmail(email, asunto, mensaje, datosEvento) {
+  // Validar que EmailJS esté cargado
+  if (typeof emailjs === 'undefined') {
+    console.error('❌ EmailJS no está cargado');
+    mostrarNotificacion('❌ Error: EmailJS no cargado', 'error');
+    return false;
+  }
+  
   try {
+    // Parámetros para la plantilla
     const templateParams = {
-      to_email: email,
-      subject: asunto,
-      message: mensaje,
-      event_title: datosEvento.titulo,
-      event_date: datosEvento.fecha,
-      event_time: datosEvento.horario,
-      event_location: datosEvento.lugar,
-      event_description: datosEvento.descripcion
+      email: email,
+      nombre: email.split('@')[0],
+      evento: datosEvento.titulo,
+      lugar: datosEvento.lugar,
+      horario: datosEvento.horario,
+      reply_to: 'cvvmultimedia@gmail.com'
     };
+    
+    console.log('📧 Enviando email con parámetros:', templateParams);
     
     const response = await emailjs.send(
       EMAILJS_CONFIG.SERVICE_ID,
@@ -540,27 +536,39 @@ async function enviarNotificacionEmail(email, asunto, mensaje, datosEvento) {
       templateParams
     );
     
-    console.log('✅ Email enviado:', response);
+    console.log('✅ Email enviado exitosamente:', response);
     mostrarNotificacion(`📧 Notificación enviada a ${email}`, 'success');
     return true;
+    
   } catch (error) {
-    console.error('❌ Error al enviar email:', error);
-    mostrarNotificacion('❌ Error al enviar notificación', 'error');
+    console.error('❌ Error detallado al enviar email:', error);
+    
+    let mensajeError = 'Error al enviar notificación';
+    if (error.status === 400) mensajeError = 'Error 400: Verifica tus credenciales';
+    else if (error.status === 401) mensajeError = 'Error 401: Public Key inválida';
+    else if (error.status === 404) mensajeError = 'Error 404: Service/Template ID incorrecto';
+    else if (error.status === 412) mensajeError = 'Error 412: La cuenta de email necesita reconectarse';
+    else if (error.status === 418) mensajeError = 'Error 418: Versión del SDK desactualizada';
+    else if (error.status === 422) mensajeError = 'Error 422: Parámetros de plantilla incorrectos';
+    
+    mostrarNotificacion(`❌ ${mensajeError}`, 'error');
     return false;
   }
 }
 
-// ===== ACTUALIZAR FUNCIÓN DE VERIFICACIÓN DE NOTIFICACIONES =====
+// ===== FUNCIÓN DE VERIFICACIÓN DE NOTIFICACIONES =====
 async function verificarNotificaciones() {
+  // Asegurar que EmailJS esté cargado
+  if (typeof emailjs === 'undefined') {
+    console.log('⚠️ EmailJS no está listo aún');
+    return;
+  }
+  
   const ahora = new Date();
   
   for (const eventoId of Object.keys(eventosSeguidos)) {
     const seguido = eventosSeguidos[eventoId];
     if (!seguido.fechaInicio) continue;
-    
-    // Buscar el evento original para obtener todos los datos
-    const eventoOriginal = eventosData.find(e => e.id === eventoId);
-    if (!eventoOriginal) continue;
     
     const fechaInicio = new Date(seguido.fechaInicio);
     const fechaFin = new Date(seguido.fechaInicio);
@@ -570,21 +578,16 @@ async function verificarNotificaciones() {
     
     // NOTIFICACIÓN 15 MINUTOS ANTES
     if (!seguido.notificadoInicio && ahora >= quinceMinAntes && ahora < fechaInicio) {
-      const asunto = `⏰ ¡${eventoOriginal.titulo} comienza en 15 minutos!`;
-      const mensaje = `El evento "${eventoOriginal.titulo}" comenzará a las ${fechaInicio.toLocaleTimeString()}. 
-      
-📅 Fecha: ${fechaInicio.toLocaleDateString()}
-🕐 Horario: ${eventoOriginal.horario}
-📍 Lugar: ${eventoOriginal.lugar}
-📝 Descripción: ${eventoOriginal.descripcion}
-
-¡Te esperamos!`;
-      
       const enviado = await enviarNotificacionEmail(
-        seguido.email, 
-        asunto, 
-        mensaje, 
-        eventoOriginal
+        seguido.email,
+        `⏰ ¡${seguido.titulo} comienza en 15 minutos!`,
+        '',
+        {
+          titulo: seguido.titulo,
+          horario: seguido.horario,
+          lugar: seguido.lugar,
+          descripcion: seguido.descripcion
+        }
       );
       
       if (enviado) {
@@ -595,95 +598,59 @@ async function verificarNotificaciones() {
     
     // NOTIFICACIÓN CUANDO FINALIZA
     if (!seguido.notificadoFin && ahora >= fechaFin) {
-      const asunto = `✅ ${eventoOriginal.titulo} ha finalizado`;
-      const mensaje = `El evento "${eventoOriginal.titulo}" ha finalizado. 
-
-Esperamos que hayas disfrutado. 
-¡Seguinos para más actividades en Camino, Verdad y Vida!`;
-      
-      const enviado = await enviarNotificacionEmail(
-        seguido.email, 
-        asunto, 
-        mensaje, 
-        eventoOriginal
-      );
-      
-      if (enviado) {
-        seguido.notificadoFin = true;
-        guardarSeguimientos();
-      }
+      console.log('🔔 Evento finalizado:', seguido.titulo);
+      seguido.notificadoFin = true;
+      guardarSeguimientos();
     }
   }
 }
 
-// ===== MODIFICAR MODAL PARA INCLUIR ADVERTENCIA =====
-function mostrarModalSeguimiento(eventoId, eventoTitulo, fechaInicio) {
-  const modal = document.createElement('div');
-  modal.className = 'modal-seguimiento';
-  modal.innerHTML = `
-    <div class="modal-content">
-      <span class="modal-close">&times;</span>
-      <h3><i class="fas fa-bell"></i> Seguir evento</h3>
-      <p>Recibirás notificaciones por email cuando <strong>${eventoTitulo}</strong> esté por comenzar y cuando finalice.</p>
-      <p style="font-size: 0.9rem; color: var(--coral); margin-bottom: 1rem;">
-        <i class="fas fa-info-circle"></i> ¡IMPORTANTE! COLOCA EL CORREO DE MANERA CORRECTA
-      </p>
-      <input type="email" id="email-seguimiento" placeholder="tu@email.com" required>
-      <button id="confirmar-seguimiento">Confirmar</button>
-    </div>
-  `;
-  
-  document.body.appendChild(modal);
-  
-  setTimeout(() => {
-    modal.classList.add('show');
-  }, 10);
-  
-  const closeBtn = modal.querySelector('.modal-close');
-  closeBtn.onclick = () => {
-    modal.classList.remove('show');
-    setTimeout(() => modal.remove(), 300);
-  };
-  
-  const confirmBtn = modal.querySelector('#confirmar-seguimiento');
-  confirmBtn.onclick = () => {
-    const email = modal.querySelector('#email-seguimiento').value;
-    if (email && email.includes('@')) {
-      seguirEvento(eventoId, eventoTitulo, fechaInicio, email);
-      modal.classList.remove('show');
-      setTimeout(() => modal.remove(), 300);
-      actualizarBotonSeguimiento(eventoId, true);
-    } else {
-      alert('Por favor, ingresá un email válido');
-    }
-  };
-  
-  modal.onclick = (e) => {
-    if (e.target === modal) {
-      modal.classList.remove('show');
-      setTimeout(() => modal.remove(), 300);
-    }
-  };
-}
-
-// ===== INICIALIZAR EMAILJS AL CARGAR LA PÁGINA =====
-// Modificar el DOMContentLoaded existente
-const originalInit = document.addEventListener('DOMContentLoaded', function() {
-  // Esta función se reemplazará
-});
-
-// Reemplazar con esta nueva inicialización
+// ===== INICIALIZACIÓN =====
 document.addEventListener('DOMContentLoaded', function() {
   cargarEventos();
   initSeccionesSeparadas();
-  cargarEmailJS(); // <-- NUEVO: Cargar EmailJS
   
-  setInterval(verificarNotificaciones, 60000);
+  // Cargar EmailJS
+  cargarEmailJS().then(() => {
+    console.log('📧 Sistema de notificaciones listo');
+    // Verificar notificaciones cada minuto
+    setInterval(verificarNotificaciones, 60000);
+    // Verificación inicial
+    setTimeout(verificarNotificaciones, 2000);
+  }).catch(error => {
+    console.error('❌ Error al inicializar EmailJS:', error);
+    mostrarNotificacion('❌ Error al cargar sistema de notificaciones', 'error');
+  });
+  
+  // Actualizar eventos cada minuto
   setInterval(actualizarContadores, 60000);
-  
-  setTimeout(verificarNotificaciones, 2000);
 });
 
+// Escuchar cambios en la URL
+window.addEventListener('popstate', function() {
+  destacarEventoDesdeUrl();
+});
 
-
-
+// Función de prueba (ejecutar desde consola)
+window.probarEmailJS = async function() {
+  const emailPrueba = prompt('Ingresa tu email para la prueba:');
+  if (!emailPrueba) return;
+  
+  const resultado = await enviarNotificacionEmail(
+    emailPrueba,
+    '⏰ Evento de prueba',
+    '',
+    {
+      titulo: 'Reunión de Jóvenes',
+      horario: 'Viernes 21:00hs',
+      lugar: 'Rio Mendoza 554',
+      descripcion: 'Alabanza, mensaje y Juegos'
+    }
+  );
+  
+  if (resultado) {
+    alert('✅ Email de prueba enviado correctamente. Revisá tu bandeja (y SPAM)');
+  } else {
+    alert('❌ Error al enviar email de prueba. Mirá la consola (F12) para más detalles');
+  }
+};
