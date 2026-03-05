@@ -37,6 +37,17 @@ const eventosData = [
     fechaFin: "2026-03-06T23:00:00",
     etiqueta: ""
   },
+    {
+    id: "desayuno1",
+    titulo: "Desayuno Integral - Grupo de Damas Jaris",
+    horario: "Sabado - 09:00hs",
+    lugar: "Camino Verdad y Vida - Alvear - Rio Mendoza 554",
+    descripcion: "Desayuno integral para mujeres, un evento donde podrán disfrutar y aprender junto a la Lic. Belén Kovich.",
+    imagen: "https://i.imgur.com/iPvCX37.jpeg",
+    fechaInicio: "2026-03-21T09:00:00",
+    fechaFin: "2026-03-21T11:30:00",
+    etiqueta: ""
+  },
   {
     id: "kids",
     titulo: "Escuela Biblica - CVV Kids",
@@ -47,20 +58,9 @@ const eventosData = [
     fechaInicio: null,
     fechaFin: null,
     etiqueta: {
-      texto: "Sin fecha de Inicio",
-      tipo: "rojo"
+      texto: "¡Inicio previsto para el 10/04",
+      tipo: "amarillo"
     }
-  },
-  {
-    id: "bautismo",
-    titulo: "Bautismo en Aguas",
-    horario: "Domingo 01 - 10:00hs",
-    lugar: "Complejo Los Teritos - Gral. Alvear",
-    descripcion: "El Bautismo en Aguas representa la decisión de seguir a Jesús y comenzar una nueva vida en Él.",
-    imagen: "https://i.pinimg.com/736x/fb/2f/d7/fb2fd7cda4bb3579d195d1c916eadc40.jpg",
-    fechaInicio: "2026-03-01T10:00:00",
-    fechaFin: "2026-03-01T13:00:00",
-    etiqueta: ""
   },
 ];
 
@@ -654,3 +654,4 @@ window.probarEmailJS = async function() {
     alert('❌ Error al enviar email de prueba. Mirá la consola (F12) para más detalles');
   }
 };
+
