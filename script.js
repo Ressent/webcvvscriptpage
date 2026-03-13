@@ -33,9 +33,12 @@ const eventosData = [
     lugar: "Camino Verdad y Vida - Alvear / Rio Mendoza 554",
     descripcion: "Alabanza, mensaje y Juegos. Traé tu mate 🧉",
     imagen: "https://i.imgur.com/OS9AjC7.png",
-    fechaInicio: "2026-03-06T21:00:00",
-    fechaFin: "2026-03-06T23:00:00",
-    etiqueta: ""
+    fechaInicio: null,
+    fechaFin: null,
+    etiqueta: {
+      texto: "¡Todos los Viernes!",
+      tipo: "verde"
+    }
   },
     {
     id: "desayuno1",
@@ -654,4 +657,5 @@ window.probarEmailJS = async function() {
     alert('❌ Error al enviar email de prueba. Mirá la consola (F12) para más detalles');
   }
 };
+
 
