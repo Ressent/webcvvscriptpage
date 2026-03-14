@@ -40,6 +40,17 @@ const eventosData = [
       tipo: "verde"
     }
   },
+      {
+    id: "hombres1",
+    titulo: "Reunión de Varones - Unidos para permanecer",
+    horario: "Sabado - 20:30hs",
+    lugar: "Camino Verdad y Vida - Alvear - Rio Mendoza 554",
+    descripcion: "¡1ra reunión de varones del año!",
+    imagen: "https://i.imgur.com/0WW5kiL.jpeg",
+    fechaInicio: "2026-03-14T20:30:00",
+    fechaFin: "2026-03-14T23:30:00",
+    etiqueta: ""
+  },
     {
     id: "desayuno1",
     titulo: "Desayuno Integral - Grupo de Damas Jaris",
