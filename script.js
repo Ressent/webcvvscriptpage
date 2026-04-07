@@ -60,7 +60,7 @@ const eventosData = [
     horario: "Sabado - 18:00hs",
     lugar: "Iglesia Jesús es Vida - Calle Enrique Gattera La Marzolina",
     descripcion: "¡3er encuentro de Varones 2026! Con la Iglesia Jesús es Vida te esperamos para recibir un dia especial. Pastor Invitado --> Pastor David Cordoba - Guaymallen Mdz",
-    imagen: "https://i.imgur.com/placeholder.jpg",  // ← URL de ejemplo, REEMPLAZAR
+    imagen: "https://i.imgur.com/gzUb9sd.jpeg",  // ← URL de ejemplo, REEMPLAZAR
     fechaInicio: "2026-04-11T18:00:00",
     fechaFin: "2026-04-11T21:00:00",  // ← CORREGIDO: antes decía 2026-03-14
     etiqueta: ""
@@ -71,7 +71,7 @@ const eventosData = [
     horario: "Sabado - 17:00hs",
     lugar: "Camino Verdad y Vida - Alvear - Rio Mendoza 554",
     descripcion: "Nos volvemos a encontrar este año con el 5to encuentro de mujeres organizado por el grupo de mujeres de CVV Alvear y Jesús es Vida, Pastora Invitada Betty Cordoba desde Guaymallen Mdz.",
-    imagen: "https://i.imgur.com/placeholder2.jpg",  // ← URL de ejemplo, REEMPLAZAR
+    imagen: "https://i.imgur.com/DTaSYRP.jpeg",  // ← URL de ejemplo, REEMPLAZAR
     fechaInicio: "2026-04-11T17:00:00",
     fechaFin: "2026-04-11T20:30:00",
     etiqueta: ""
