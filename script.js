@@ -40,41 +40,40 @@ const eventosData = [
       tipo: "verde"
     }
   },
-      {
-    id: "hombres1",
-    titulo: "Reunión de Varones - Unidos para permanecer",
-    horario: "Sabado - 20:30hs",
-    lugar: "Camino Verdad y Vida - Alvear - Rio Mendoza 554",
-    descripcion: "¡1ra reunión de varones del año!",
-    imagen: "https://i.imgur.com/0WW5kiL.jpeg",
-    fechaInicio: "2026-03-14T20:30:00",
-    fechaFin: "2026-03-14T23:30:00",
-    etiqueta: ""
-  },
     {
-    id: "desayuno1",
-    titulo: "Desayuno Integral - Grupo de Damas Jaris",
-    horario: "Sabado - 09:00hs",
-    lugar: "Camino Verdad y Vida - Alvear - Rio Mendoza 554",
-    descripcion: "Desayuno integral para mujeres, un evento donde podrán disfrutar y aprender junto a la Lic. Belén Kovich.",
-    imagen: "https://i.imgur.com/iPvCX37.jpeg",
-    fechaInicio: "2026-03-21T09:00:00",
-    fechaFin: "2026-03-21T11:30:00",
-    etiqueta: ""
-  },
-  {
     id: "kids",
     titulo: "Escuela Biblica - CVV Kids",
-    horario: "Vie 18:30hs",
+    horario: "Viernes - 18:30hs",
     lugar: "Camino Verdad y Vida - Alvear / Rio Mendoza 554",
-    descripcion: "Este evento no tiene fecha confirmada aún.",
+    descripcion: "Todos los Viernes nos encontramos para jugar, aprender y divertirnos juntos con la palabra de Dios.",
     imagen: "https://i.pinimg.com/1200x/f3/76/b0/f376b044f80a9fa6c2471ad83de7c534.jpg",
     fechaInicio: null,
     fechaFin: null,
     etiqueta: {
-      texto: "¡Inicio previsto para el 10/04",
+      texto: "¡Viernes 18:30HS!",
       tipo: "amarillo"
-    }
+    },
+      {
+    id: "hombres1",
+    titulo: "3er Encuentro de Varones - Unidos Para Permanecer",
+    horario: "Sabado - 18:00hs",
+    lugar: "Iglesia Jesús es Vida - Calle Enrique Gattera La Marzolina",
+    descripcion: "¡3er encuentro de Varones 2026! Con la Iglesia Jesús es Vida te esperamos para recibir un dia especial. Pastor Invitado --> Pastor David Cordoba - Guaymallen Mdz",
+    imagen: "https://pin.it/4bp0zqSDS",
+    fechaInicio: "2026-04-11T18:00:00",
+    fechaFin: "2026-03-14T21:00:00",
+    etiqueta: ""
+  },
+    {
+    id: "desayuno1",
+    titulo: "5° Encuentro de Mujeres en Unidad - Diseño Exclusivo",
+    horario: "Sabado - 17:00hs",
+    lugar: "Camino Verdad y Vida - Alvear - Rio Mendoza 554",
+    descripcion: "Nos volvemos a encontrar este año con el 5to encuentro de mujeres organizado por el grupo de mujeres de CVV Alvear y Jesús es Vida, Pastora Invitada Betty Cordoba desde Guaymallen Mdz.",
+    imagen: "https://pin.it/6NOwXvbex",
+    fechaInicio: "2026-04-11T17:00:00",
+    fechaFin: "2026-04-11T20:30:00",
+    etiqueta: ""
   },
 ];
 
