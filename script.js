@@ -25,6 +25,7 @@ const eventosData = [
     fechaInicio: null,
     fechaFin: null,
     etiqueta: ""
+    }
   },
   {
     id: "jovenes",
@@ -64,6 +65,7 @@ const eventosData = [
     fechaInicio: "2026-04-11T18:00:00",
     fechaFin: "2026-03-14T21:00:00",
     etiqueta: ""
+    }
   },
     {
     id: "desayuno1",
