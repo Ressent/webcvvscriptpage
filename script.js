@@ -52,7 +52,8 @@ const eventosData = [
     etiqueta: {
       texto: "¡Viernes 18:30HS!",
       tipo: "amarillo"
-    },
+    }
+  },
       {
     id: "hombres1",
     titulo: "3er Encuentro de Varones - Unidos Para Permanecer",
@@ -74,6 +75,7 @@ const eventosData = [
     fechaInicio: "2026-04-11T17:00:00",
     fechaFin: "2026-04-11T20:30:00",
     etiqueta: ""
+    }
   },
 ];
 
