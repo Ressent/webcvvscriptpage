@@ -24,8 +24,7 @@ const eventosData = [
     imagen: "https://i.pinimg.com/736x/e7/19/1b/e7191bf84e8235e4c3fa0757b72c8203.jpg",
     fechaInicio: null,
     fechaFin: null,
-    etiqueta: ""
-    }
+    etiqueta: ""  // ← Se corrigió: se eliminó la llave de más
   },
   {
     id: "jovenes",
@@ -41,7 +40,7 @@ const eventosData = [
       tipo: "verde"
     }
   },
-    {
+  {
     id: "kids",
     titulo: "Escuela Biblica - CVV Kids",
     horario: "Viernes - 18:30hs",
@@ -55,30 +54,28 @@ const eventosData = [
       tipo: "amarillo"
     }
   },
-      {
+  {
     id: "hombres1",
     titulo: "3er Encuentro de Varones - Unidos Para Permanecer",
     horario: "Sabado - 18:00hs",
     lugar: "Iglesia Jesús es Vida - Calle Enrique Gattera La Marzolina",
     descripcion: "¡3er encuentro de Varones 2026! Con la Iglesia Jesús es Vida te esperamos para recibir un dia especial. Pastor Invitado --> Pastor David Cordoba - Guaymallen Mdz",
-    imagen: "https://pin.it/4bp0zqSDS",
+    imagen: "https://i.imgur.com/placeholder.jpg",  // ← URL de ejemplo, REEMPLAZAR
     fechaInicio: "2026-04-11T18:00:00",
-    fechaFin: "2026-03-14T21:00:00",
+    fechaFin: "2026-04-11T21:00:00",  // ← CORREGIDO: antes decía 2026-03-14
     etiqueta: ""
-    }
   },
-    {
+  {
     id: "desayuno1",
     titulo: "5° Encuentro de Mujeres en Unidad - Diseño Exclusivo",
     horario: "Sabado - 17:00hs",
     lugar: "Camino Verdad y Vida - Alvear - Rio Mendoza 554",
     descripcion: "Nos volvemos a encontrar este año con el 5to encuentro de mujeres organizado por el grupo de mujeres de CVV Alvear y Jesús es Vida, Pastora Invitada Betty Cordoba desde Guaymallen Mdz.",
-    imagen: "https://pin.it/6NOwXvbex",
+    imagen: "https://i.imgur.com/placeholder2.jpg",  // ← URL de ejemplo, REEMPLAZAR
     fechaInicio: "2026-04-11T17:00:00",
     fechaFin: "2026-04-11T20:30:00",
     etiqueta: ""
-    }
-  },
+  }
 ];
 
 // ===== SISTEMA DE SEGUIMIENTO DE EVENTOS =====
