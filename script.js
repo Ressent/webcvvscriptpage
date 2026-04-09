@@ -11,8 +11,8 @@ const eventosData = [
     fechaInicio: null,
     fechaFin: null,
     etiqueta: {
-      texto: "¡Todos los Domingos!",
-      tipo: "verde"
+      texto: "¡Reunión Domingo 12/04 Suspendida!",
+      tipo: "rojo"
     }
   },
   {
