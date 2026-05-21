@@ -1,172 +1,1604 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Iglesia Camino, Verdad y Vida · Gral. Alvear</title>
-  <!-- Font Awesome 6 (iconos) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-  <!-- CSS principal -->
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+/* ===========================
+   CAMINO VERDAD Y VIDA - CSS
+   =========================== */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --navy: #0d2d45;
+  --navy-mid: #123552;
+  --navy-deep: #091e2e;
+  --teal: #2ba8a0;
+  --teal-light: #d0f0ed;
+  --coral: #e8714a;
+  --coral-dark: #c85830;
+  --coral-glow: rgba(232,113,74,0.35);
+  --gold: #f0ba30;
+  --gold-light: rgba(240,186,48,0.15);
+  --white: #ffffff;
+  --bg: #f0f6fa;
+  --bg-alt: #e4eff6;
+  --text: #0e2234;
+  --text-soft: #4a6880;
+  --border: #c5dae7;
+  --shadow: rgba(13,45,69,0.12);
+  --shadow-lg: rgba(13,45,69,0.22);
+  --radius: 16px;
+  --radius-lg: 24px;
+  --header-h: 70px;
+}
+
+[data-theme="dark"] {
+  --navy: #5abdb5;
+  --navy-mid: #3a9e96;
+  --teal: #41cec5;
+  --teal-light: #0a2826;
+  --coral: #f08060;
+  --coral-dark: #e06840;
+  --coral-glow: rgba(240,128,96,0.3);
+  --gold: #f5c842;
+  --gold-light: rgba(245,200,66,0.12);
+  --white: #0f1f2d;
+  --bg: #081623;
+  --bg-alt: #0d1e2c;
+  --text: #deedf5;
+  --text-soft: #7da8be;
+  --border: #1a3548;
+  --shadow: rgba(0,0,0,0.35);
+  --shadow-lg: rgba(0,0,0,0.5);
+}
+
+html { scroll-behavior:smooth; }
+body { font-family:'Outfit',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; transition:background 0.3s,color 0.3s; }
+h1,h2,h3,h4 { font-family:'Playfair Display',serif; color:var(--text); }
+a { text-decoration:none; color:inherit; }
+.container { max-width:1240px; margin:0 auto; padding:0 1.5rem; }
+
+/* ---- ANUNCIO BAR ---- */
+.anuncio-bar {
+  background:linear-gradient(90deg,var(--navy-deep),var(--teal) 60%,var(--coral));
+  background-size:200% 100%;
+  animation:bar-shimmer 6s ease infinite alternate;
+  color:white; text-align:center; padding:0.55rem 2rem;
+  font-size:0.88rem; font-weight:500;
+  display:flex; justify-content:center; align-items:center; gap:0.8rem;
+  position:relative;
+}
+@keyframes bar-shimmer { 0%{background-position:0% 50%} 100%{background-position:100% 50%} }
+.anuncio-bar strong { color:#ffe07a; font-weight:700; }
+.anuncio-dot { width:7px; height:7px; background:#ffe07a; border-radius:50%; display:inline-block; animation:blink 1.2s ease infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+.anuncio-close { background:none; border:none; color:white; font-size:1.2rem; cursor:pointer; position:absolute; right:1rem; top:50%; transform:translateY(-50%); opacity:0.6; transition:opacity 0.2s; }
+.anuncio-close:hover { opacity:1; }
+
+/* ---- HEADER ---- */
+header {
+  background:rgba(9,30,46,0.96);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  color:white; position:sticky; top:0; z-index:999;
+  height:var(--header-h); display:flex; align-items:center;
+  border-bottom:2px solid rgba(232,113,74,0.5);
+  box-shadow:0 4px 30px rgba(0,0,0,0.25);
+  transition:background 0.3s;
+}
+[data-theme="dark"] header { background:rgba(5,16,24,0.97); }
+.header-flex { display:flex; align-items:center; justify-content:space-between; width:100%; }
+.logo-area { display:flex; align-items:center; gap:0.9rem; cursor:pointer; }
+.logo-container { position:relative; width:44px; height:44px; flex-shrink:0; }
+.logo-icon { width:44px; height:44px; background:linear-gradient(135deg,var(--coral),var(--coral-dark)); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.3rem; color:white; font-family:'Playfair Display',serif; position:relative; z-index:2; box-shadow:0 4px 15px var(--coral-glow); }
+.pulse-ring { position:absolute; top:-3px; left:-3px; width:calc(100%+6px); height:calc(100%+6px); border-radius:14px; border:2px solid var(--coral); animation:pulse-ring 2.5s ease-out infinite; opacity:0; }
+@keyframes pulse-ring { 0%{transform:scale(0.85);opacity:0.8} 100%{transform:scale(1.4);opacity:0} }
+.logo-text h1 { font-size:1.1rem; color:white; font-weight:700; line-height:1.15; letter-spacing:-0.2px; }
+.badge-ciudad { display:inline-block; background:linear-gradient(90deg,var(--coral),var(--coral-dark)); color:white; font-size:0.68rem; font-weight:700; padding:0.15rem 0.7rem; border-radius:20px; margin-top:0.1rem; font-family:'Outfit',sans-serif; letter-spacing:0.8px; text-transform:uppercase; }
+.nav-links { display:flex; align-items:center; gap:0.2rem; }
+.nav-link { color:rgba(255,255,255,0.7); font-size:0.88rem; font-weight:500; padding:0.5rem 0.85rem; border-radius:10px; transition:all 0.2s; display:flex; align-items:center; gap:0.4rem; cursor:pointer; letter-spacing:0.2px; }
+.nav-link i { font-size:0.8rem; }
+.nav-link:hover { background:rgba(255,255,255,0.1); color:white; }
+.nav-link.active { background:var(--coral); color:white; box-shadow:0 4px 15px var(--coral-glow); }
+.btn-dark-toggle { background:rgba(255,255,255,0.08); border:1.5px solid rgba(255,255,255,0.15); color:white; width:36px; height:36px; border-radius:50%; cursor:pointer; font-size:0.85rem; display:flex; align-items:center; justify-content:center; transition:all 0.2s; margin-left:0.5rem; }
+.btn-dark-toggle:hover { background:var(--coral); border-color:var(--coral); }
+.hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:0.5rem; }
+.hamburger span { display:block; width:22px; height:2px; background:white; border-radius:2px; transition:all 0.3s; }
+.hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity:0; }
+.hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+/* ---- SECTIONS ---- */
+.section { display:none; min-height:calc(100vh - var(--header-h)); padding:0 0 5rem; }
+.section.section-active { display:block; animation:fadeInUp 0.4s ease; }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+.section-header { text-align:center; margin-bottom:3rem; padding-top:4.5rem; }
+.seccion-etiqueta { display:inline-flex; align-items:center; gap:0.4rem; background:var(--gold-light); color:var(--gold); font-size:0.72rem; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; padding:0.4rem 1.1rem; border-radius:30px; margin-bottom:0.75rem; font-family:'Outfit',sans-serif; border:1px solid rgba(240,186,48,0.3); }
+.section-header h2 { font-size:2.8rem; color:var(--text); line-height:1.1; font-weight:800; }
+.section-sub { color:var(--text-soft); font-size:1.05rem; margin-top:0.6rem; max-width:580px; margin-left:auto; margin-right:auto; }
+
+/* ---- HERO ---- */
+.hero {
+  background:var(--navy-deep);
+  padding:5rem 0 4rem; position:relative; overflow:hidden;
+}
+.hero::before {
+  content:'';
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse at 80% 20%, rgba(43,168,160,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 10% 80%, rgba(232,113,74,0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(240,186,48,0.05) 0%, transparent 70%);
+  pointer-events:none;
+}
+.hero-grid-lines {
+  position:absolute; inset:0; pointer-events:none; overflow:hidden;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+.hero-content { position:relative; z-index:2; text-align:center; }
+.hero-eyebrow { display:inline-flex; align-items:center; gap:0.5rem; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15); color:rgba(255,255,255,0.8); font-size:0.75rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; padding:0.45rem 1.2rem; border-radius:30px; margin-bottom:1.5rem; }
+.hero-eyebrow i { color:var(--coral); }
+.hero-title { font-size:clamp(2.4rem,5.5vw,4.2rem); color:white; line-height:1.05; margin-bottom:1.2rem; font-weight:800; letter-spacing:-1px; }
+.hero-title em { color:var(--coral); font-style:normal; position:relative; }
+.hero-title em::after { content:''; position:absolute; bottom:-4px; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--coral),var(--gold)); border-radius:2px; }
+.hero-verse { color:rgba(255,255,255,0.72); font-size:1.1rem; font-style:italic; font-family:'Playfair Display',serif; max-width:540px; margin:0 auto 2rem; padding:1rem 1.5rem; border-radius:14px; background:rgba(255,255,255,0.05); border-left:3px solid var(--gold); transition:opacity 0.5s; }
+.hero-tags { display:flex; justify-content:center; gap:0.7rem; flex-wrap:wrap; margin-bottom:2.5rem; }
+.hero-tags span { background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15); color:rgba(255,255,255,0.8); padding:0.3rem 1rem; border-radius:30px; font-size:0.82rem; font-weight:600; letter-spacing:0.5px; }
+.hero-actions { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+.btn-primary { background:linear-gradient(135deg,var(--coral),var(--coral-dark)); color:white; padding:0.9rem 2.2rem; border-radius:14px; font-weight:700; font-size:0.95rem; display:inline-flex; align-items:center; gap:0.5rem; transition:all 0.25s; box-shadow:0 8px 24px var(--coral-glow); cursor:pointer; border:none; letter-spacing:0.3px; }
+.btn-primary:hover { transform:translateY(-3px); box-shadow:0 14px 30px var(--coral-glow); filter:brightness(1.05); }
+.btn-secondary { background:rgba(255,255,255,0.08); border:1.5px solid rgba(255,255,255,0.25); color:white; padding:0.9rem 2.2rem; border-radius:14px; font-weight:600; font-size:0.95rem; display:inline-flex; align-items:center; gap:0.5rem; transition:all 0.25s; cursor:pointer; }
+.btn-secondary:hover { background:rgba(255,255,255,0.16); transform:translateY(-3px); }
+
+/* ---- COUNTDOWN CARD — NUEVA VERSIÓN ---- */
+.countdown-section { padding:0 0 1rem; }
+.countdown-card {
+  position:relative; overflow:hidden;
+  background:linear-gradient(140deg, #0a1e30 0%, #0e2d42 50%, #0d2a3d 100%);
+  border-radius:28px;
+  padding:2.5rem 2.5rem 2rem;
+  margin:2rem auto 0;
+  max-width:780px;
+  text-align:center;
+  color:white;
+  box-shadow:0 24px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.08);
+}
+[data-theme="dark"] .countdown-card { background:linear-gradient(140deg,#040e17 0%,#08192a 100%); }
+.countdown-card::before {
+  content:'';
+  position:absolute; top:-80px; right:-60px;
+  width:280px; height:280px;
+  background:radial-gradient(circle, rgba(43,168,160,0.2) 0%, transparent 70%);
+  pointer-events:none;
+}
+.countdown-card::after {
+  content:'';
+  position:absolute; bottom:-60px; left:-40px;
+  width:200px; height:200px;
+  background:radial-gradient(circle, rgba(232,113,74,0.18) 0%, transparent 70%);
+  pointer-events:none;
+}
+.cd-status-badge {
+  display:inline-flex; align-items:center; gap:0.5rem;
+  font-size:0.75rem; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+  padding:0.35rem 1rem; border-radius:30px; margin-bottom:0.8rem;
+  background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12);
+  color:rgba(255,255,255,0.7);
+  transition:all 0.4s;
+}
+.cd-status-badge.en-curso {
+  background:rgba(39,174,96,0.2); border-color:rgba(39,174,96,0.5);
+  color:#6ddb95;
+  animation:badge-pulse 2s ease infinite;
+}
+.cd-status-badge.en-curso .cd-dot { background:#27ae60; animation:blink 0.8s ease infinite; }
+@keyframes badge-pulse { 0%,100%{box-shadow:0 0 0 0 rgba(39,174,96,0)} 50%{box-shadow:0 0 0 6px rgba(39,174,96,0.15)} }
+.cd-dot { width:6px; height:6px; border-radius:50%; background:var(--coral); flex-shrink:0; }
+.cd-meeting-name {
+  font-family:'Playfair Display',serif;
+  font-size:1.7rem; font-weight:700;
+  color:white; margin-bottom:0.4rem;
+  line-height:1.1;
+  transition:all 0.4s;
+}
+.cd-meeting-info {
+  font-size:0.88rem; color:rgba(255,255,255,0.5);
+  margin-bottom:1.8rem;
+  display:flex; align-items:center; justify-content:center; gap:0.6rem;
+  flex-wrap:wrap;
+}
+.cd-meeting-info span { display:flex; align-items:center; gap:0.3rem; }
+.cd-meeting-info i { color:var(--teal); font-size:0.75rem; }
+.countdown-timer { display:flex; align-items:center; justify-content:center; gap:0.4rem; flex-wrap:wrap; position:relative; z-index:1; }
+.tiempo-bloque {
+  display:flex; flex-direction:column; align-items:center;
+  background:rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:16px; padding:1.1rem 1.6rem; min-width:82px;
+  backdrop-filter:blur(10px);
+  transition:transform 0.2s, background 0.4s;
+}
+.tiempo-bloque.tick { animation:tick-bounce 0.15s ease; }
+@keyframes tick-bounce { 0%{transform:scale(1)} 50%{transform:scale(0.94)} 100%{transform:scale(1)} }
+.tiempo-bloque span { font-size:2.4rem; font-weight:700; font-family:'Playfair Display',serif; line-height:1; background:linear-gradient(180deg,#fff 0%,rgba(255,255,255,0.75) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.tiempo-bloque small { font-size:0.65rem; opacity:0.55; margin-top:0.3rem; text-transform:uppercase; letter-spacing:1.5px; font-weight:600; }
+.tiempo-sep { font-size:2.2rem; font-weight:300; opacity:0.3; margin-bottom:1.4rem; }
+
+/* En curso — cambia apariencia */
+.countdown-card.en-curso .tiempo-bloque { background:rgba(39,174,96,0.1); border-color:rgba(39,174,96,0.25); }
+.countdown-card.en-curso .tiempo-bloque span { background:linear-gradient(180deg,#6ddb95 0%,#27ae60 100%); -webkit-background-clip:text; background-clip:text; }
+
+.cd-progress-wrap { margin-top:1.5rem; position:relative; z-index:1; }
+.cd-progress-label { font-size:0.75rem; opacity:0.45; margin-bottom:0.5rem; display:flex; justify-content:space-between; }
+.cd-progress-bar { height:3px; background:rgba(255,255,255,0.08); border-radius:3px; overflow:hidden; }
+.cd-progress-fill { height:100%; background:linear-gradient(90deg,var(--teal),var(--coral)); border-radius:3px; transition:width 1s linear; }
+.cd-next-row { margin-top:1.2rem; display:flex; align-items:center; justify-content:center; gap:0.6rem; font-size:0.82rem; color:rgba(255,255,255,0.4); }
+.cd-next-row strong { color:rgba(255,255,255,0.7); }
+
+/* ---- QUIÉNES SOMOS ---- */
+.quienes-grid { display:grid; grid-template-columns:1fr 1fr; gap:3.5rem; align-items:center; padding:2.5rem 0; }
+.quienes-img-wrap { position:relative; border-radius:var(--radius-lg); overflow:visible; }
+.quienes-img-wrap img { width:100%; height:420px; object-fit:cover; border-radius:var(--radius-lg); box-shadow:0 24px 60px var(--shadow-lg); transition:transform 0.4s; }
+.quienes-img-wrap:hover img { transform:scale(1.02); }
+.img-overlay-badge { position:absolute; bottom:-15px; right:-15px; background:linear-gradient(135deg,var(--coral),var(--coral-dark)); color:white; padding:1rem 1.4rem; border-radius:var(--radius); display:flex; flex-direction:column; align-items:center; gap:0.3rem; font-weight:700; font-size:0.85rem; box-shadow:0 10px 30px var(--coral-glow); }
+.img-overlay-badge i { font-size:1.4rem; }
+.quienes-texto .seccion-etiqueta { display:inline-flex; }
+.quienes-texto h3 { font-size:2rem; line-height:1.2; margin:0.75rem 0 1.2rem; font-weight:800; }
+.quienes-texto h3 em { color:var(--coral); font-style:italic; }
+.quienes-texto p { color:var(--text-soft); font-size:1.02rem; margin-bottom:0.9rem; line-height:1.75; }
+.valores-row { display:flex; flex-wrap:wrap; gap:0.6rem; margin:1.2rem 0; }
+.valor-chip { background:var(--teal-light); color:var(--teal); padding:0.4rem 1rem; border-radius:30px; font-size:0.85rem; font-weight:600; display:flex; align-items:center; gap:0.4rem; border:1px solid rgba(43,168,160,0.25); }
+[data-theme="dark"] .valor-chip { background:rgba(43,168,160,0.12); }
+.quienes-cta { background:var(--bg-alt); border-left:4px solid var(--coral); padding:0.9rem 1.2rem; border-radius:0 14px 14px 0; color:var(--text)!important; font-size:1rem!important; }
+[data-theme="dark"] .quienes-cta { background:rgba(255,255,255,0.05); }
+
+/* ---- STATS STRIP ---- */
+.stats-strip { background:linear-gradient(135deg,var(--navy-deep),var(--navy-mid)); padding:3rem 0; margin-top:2rem; position:relative; overflow:hidden; }
+.stats-strip::before { content:''; position:absolute; inset:0; background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+.stats-inner { display:flex; align-items:center; justify-content:center; gap:3.5rem; flex-wrap:wrap; position:relative; }
+.stat-item { display:flex; flex-direction:column; align-items:center; color:white; }
+.stat-num { font-size:2.8rem; font-weight:800; font-family:'Playfair Display',serif; color:var(--coral); line-height:1; }
+.stat-label { font-size:0.82rem; opacity:0.65; text-transform:uppercase; letter-spacing:1.5px; margin-top:0.3rem; font-weight:500; }
+.stat-divider { width:1px; height:55px; background:rgba(255,255,255,0.12); }
+
+/* ---- EVENTS ---- */
+.event-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(295px,1fr)); gap:1.6rem; }
+.event-card { background:var(--white); border-radius:var(--radius-lg); overflow:hidden; border:1px solid var(--border); box-shadow:0 4px 20px var(--shadow); transition:transform 0.25s,box-shadow 0.25s; display:flex; flex-direction:column; }
+.event-card:hover { transform:translateY(-6px); box-shadow:0 20px 50px var(--shadow-lg); }
+.event-img { height:195px; background-size:cover; background-position:center; position:relative; }
+.event-content { padding:1.4rem; display:flex; flex-direction:column; flex:1; }
+.event-content h3 { font-size:1.1rem; margin-bottom:0.6rem; line-height:1.3; font-weight:700; }
+.event-meta { font-size:0.84rem; color:var(--text-soft); display:flex; align-items:center; gap:0.4rem; margin-bottom:0.3rem; }
+.event-meta i { color:var(--teal); font-size:0.75rem; }
+.event-desc { font-size:0.88rem; color:var(--text-soft); margin:0.7rem 0 1rem; line-height:1.55; flex:1; }
+.event-actions { display:flex; gap:0.5rem; margin-top:auto; }
+.btn-compartir,.btn-seguir { flex:1; padding:0.6rem 0.5rem; border:none; border-radius:10px; font-size:0.8rem; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:0.4rem; transition:all 0.2s; font-family:'Outfit',sans-serif; }
+.btn-compartir { background:var(--teal-light); color:var(--teal); }
+.btn-compartir:hover { background:var(--teal); color:white; }
+.btn-seguir { background:var(--bg-alt); color:var(--text-soft); border:1.5px solid var(--border); }
+.btn-seguir:hover { background:var(--coral); color:white; border-color:var(--coral); }
+.btn-seguir.siguiendo { background:var(--coral); color:white; border-color:var(--coral); }
+.etiqueta-evento { position:absolute; top:12px; right:12px; padding:0.28rem 0.8rem; border-radius:30px; font-size:0.72rem; font-weight:700; font-family:'Outfit',sans-serif; letter-spacing:0.3px; }
+.etiqueta-verde { background:rgba(39,174,96,0.9); color:white; }
+.etiqueta-rojo { background:rgba(192,57,43,0.9); color:white; }
+.etiqueta-amarillo { background:rgba(240,186,48,0.9); color:#3a2400; }
+.evento-curso { border:2px solid #27ae60!important; box-shadow:0 0 0 4px rgba(39,174,96,0.1)!important; }
+.evento-finalizado { opacity:0.65; }
+
+/* ---- HORARIO BLOCK ---- */
+.horario-block { display:flex; align-items:center; gap:1.5rem; background:var(--white); border:1px solid var(--border); border-radius:var(--radius-lg); padding:2rem; margin-top:2.5rem; box-shadow:0 4px 20px var(--shadow); }
+.horario-icon { width:56px; height:56px; background:linear-gradient(135deg,var(--teal),var(--navy-mid)); border-radius:14px; display:flex; align-items:center; justify-content:center; color:white; font-size:1.4rem; flex-shrink:0; }
+.horario-titulo { font-weight:700; font-family:'Playfair Display',serif; font-size:1.1rem; margin-bottom:1rem; }
+.horario-items { display:flex; flex-wrap:wrap; gap:0.7rem; }
+.horario-item { display:flex; align-items:center; gap:0.6rem; background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:0.55rem 1rem; transition:all 0.2s; }
+.horario-item:hover { border-color:var(--teal); }
+.dia-badge { background:var(--navy-mid); color:white; font-size:0.7rem; font-weight:700; padding:0.2rem 0.55rem; border-radius:6px; letter-spacing:0.5px; }
+.horario-hora { font-weight:700; color:var(--coral); font-size:0.92rem; }
+.horario-desc { font-size:0.85rem; color:var(--text-soft); }
+
+/* ---- DEVOCIONAL ---- */
+.devocional-card { background:var(--white); border-radius:var(--radius-lg); border:1px solid var(--border); box-shadow:0 10px 40px var(--shadow); overflow:hidden; margin-top:0.5rem; }
+.devocional-header { background:linear-gradient(135deg,var(--navy-deep),var(--teal)); padding:2.5rem 2rem; color:white; text-align:center; position:relative; }
+.devocional-header::after { content:''; position:absolute; inset:0; background:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.04' fill-rule='evenodd'%3E%3Ccircle cx='40' cy='40' r='20'/%3E%3C/g%3E%3C/svg%3E"); }
+.devocional-header-icon { font-size:2.8rem; margin-bottom:0.8rem; display:block; position:relative; z-index:1; }
+.devocional-header h3 { font-size:1.6rem; color:white; margin-bottom:0.3rem; position:relative; z-index:1; }
+.devocional-fecha { font-size:0.88rem; opacity:0.75; position:relative; z-index:1; }
+.devocional-loading { padding:4rem 2rem; text-align:center; }
+.cross-spinner { font-size:3rem; animation:spin-cross 2.5s linear infinite; display:inline-block; color:var(--coral); }
+@keyframes spin-cross { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
+.devocional-loading p { margin-top:1rem; color:var(--text-soft); }
+.devocional-content { padding:2.5rem; }
+.versiculo-box { background:linear-gradient(135deg,rgba(43,168,160,0.07),rgba(13,45,69,0.04)); border:1px solid var(--border); border-left:4px solid var(--teal); border-radius:var(--radius); padding:2rem; margin-bottom:1.8rem; position:relative; }
+.quote-icon { color:var(--teal); font-size:2rem; opacity:0.25; position:absolute; top:1rem; left:1rem; }
+.versiculo-texto { font-family:'Playfair Display',serif; font-size:1.2rem; font-style:italic; line-height:1.7; color:var(--text); margin-bottom:0.8rem; padding-left:1rem; }
+.versiculo-ref { font-weight:700; color:var(--teal); font-size:0.98rem; padding-left:1rem; }
+.reflexion-box { background:var(--bg-alt); border-radius:var(--radius); padding:1.5rem; margin-bottom:1.5rem; }
+.reflexion-box h4 { display:flex; align-items:center; gap:0.5rem; margin-bottom:0.8rem; color:var(--navy); font-size:0.95rem; font-family:'Outfit',sans-serif; }
+[data-theme="dark"] .reflexion-box h4 { color:var(--teal); }
+.reflexion-box h4 i { color:var(--gold); }
+.reflexion-box p { color:var(--text-soft); line-height:1.75; font-size:0.95rem; }
+.oracion-box { background:var(--bg-alt); border-radius:var(--radius); padding:1.5rem; margin-bottom:1.5rem; border-left:3px solid var(--coral); }
+.oracion-box h4 { display:flex; align-items:center; gap:0.5rem; margin-bottom:0.8rem; color:var(--navy); font-size:0.95rem; font-family:'Outfit',sans-serif; }
+[data-theme="dark"] .oracion-box h4 { color:var(--teal); }
+.oracion-box h4 i { color:var(--coral); }
+.oracion-box p { color:var(--text-soft); line-height:1.75; font-size:0.95rem; font-style:italic; }
+.devocional-footer { display:flex; gap:0.8rem; flex-wrap:wrap; }
+.btn-nuevo-devocional { flex:1; background:linear-gradient(135deg,var(--teal),var(--navy-mid)); color:white; border:none; padding:0.9rem; border-radius:12px; font-size:0.92rem; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; transition:all 0.2s; font-family:'Outfit',sans-serif; }
+.btn-nuevo-devocional:hover { transform:translateY(-2px); opacity:0.9; }
+.btn-compartir-dev { flex:1; background:var(--coral); color:white; border:none; padding:0.9rem; border-radius:12px; font-size:0.92rem; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; transition:all 0.2s; font-family:'Outfit',sans-serif; }
+.btn-compartir-dev:hover { transform:translateY(-2px); opacity:0.9; }
+.dev-dia-badge { display:inline-block; background:var(--coral); color:white; font-size:0.72rem; font-weight:700; padding:0.2rem 0.8rem; border-radius:20px; margin-top:0.5rem; }
+
+/* ---- REDES ---- */
+.redes-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1.2rem; }
+.red-card { display:flex; align-items:center; gap:1.2rem; background:var(--white); border:1px solid var(--border); border-radius:var(--radius-lg); padding:1.4rem 1.6rem; transition:all 0.25s; box-shadow:0 4px 16px var(--shadow); }
+.red-card:hover { transform:translateY(-4px); box-shadow:0 16px 40px var(--shadow-lg); }
+.red-icon-wrap { width:50px; height:50px; border-radius:13px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; color:white; flex-shrink:0; }
+.instagram .red-icon-wrap { background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+.youtube .red-icon-wrap { background:#ff0000; }
+.facebook .red-icon-wrap { background:#1877f2; }
+.whatsapp .red-icon-wrap { background:#25d366; }
+.red-info { flex:1; }
+.red-info strong { display:block; font-weight:700; margin-bottom:0.15rem; }
+.red-info span { font-size:0.85rem; color:var(--text-soft); }
+.red-arrow { color:var(--text-soft); transition:all 0.2s; }
+.red-card:hover .red-arrow { color:var(--coral); transform:translateX(4px); }
+
+/* ---- CONTACTO ---- */
+.contacto-grid { display:grid; grid-template-columns:1fr 1.2fr; gap:2.5rem; align-items:start; }
+.info-card { display:flex; align-items:flex-start; gap:1rem; background:var(--white); border:1px solid var(--border); border-radius:var(--radius); padding:1.2rem 1.4rem; margin-bottom:1rem; box-shadow:0 4px 15px var(--shadow); transition:all 0.2s; }
+.info-card:hover { box-shadow:0 8px 25px var(--shadow); transform:translateX(4px); }
+.info-icon { width:42px; height:42px; background:linear-gradient(135deg,var(--teal),var(--navy-mid)); border-radius:11px; display:flex; align-items:center; justify-content:center; color:white; font-size:0.95rem; flex-shrink:0; }
+.info-card h4 { font-size:0.8rem; font-weight:700; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-soft); margin-bottom:0.3rem; font-family:'Outfit',sans-serif; }
+.info-card p { font-size:0.98rem; color:var(--text); line-height:1.4; }
+.info-card a { color:var(--teal); }
+.info-card a:hover { color:var(--coral); }
+.contacto-form { background:var(--white); border:1px solid var(--border); border-radius:var(--radius-lg); padding:1.8rem; margin-top:0.5rem; }
+.contacto-form h4 { font-size:1.05rem; margin-bottom:1.2rem; display:flex; align-items:center; gap:0.5rem; color:var(--navy); font-family:'Outfit',sans-serif; font-weight:700; }
+[data-theme="dark"] .contacto-form h4 { color:var(--teal); }
+.form-group { margin-bottom:0.9rem; }
+.form-group input,.form-group textarea { width:100%; padding:0.85rem 1rem; border:1.5px solid var(--border); border-radius:12px; background:var(--bg); color:var(--text); font-family:'Outfit',sans-serif; font-size:0.92rem; transition:border-color 0.2s; resize:vertical; }
+.form-group input:focus,.form-group textarea:focus { outline:none; border-color:var(--teal); background:var(--white); }
+.btn-enviar { width:100%; background:linear-gradient(135deg,var(--coral),var(--coral-dark)); color:white; border:none; padding:0.9rem; border-radius:12px; font-size:0.98rem; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:0.5rem; transition:all 0.2s; font-family:'Outfit',sans-serif; }
+.btn-enviar:hover { opacity:0.9; transform:translateY(-2px); }
+.mapa-wrap { position:relative; border-radius:var(--radius-lg); overflow:hidden; box-shadow:0 10px 40px var(--shadow); border:1.5px solid var(--border); }
+.btn-mapa { display:flex; align-items:center; justify-content:center; gap:0.5rem; text-align:center; background:var(--navy-mid); color:white; padding:0.9rem; font-weight:600; font-size:0.92rem; transition:background 0.2s; }
+.btn-mapa:hover { background:var(--teal); }
+
+/* ---- FOOTER ---- */
+footer { background:var(--navy-deep); color:rgba(255,255,255,0.75); padding:3.5rem 0 0; border-top:3px solid var(--coral); margin-top:2rem; position:relative; overflow:hidden; }
+footer::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 80% 50%, rgba(43,168,160,0.08) 0%, transparent 60%); pointer-events:none; }
+[data-theme="dark"] footer { background:#030d15; }
+.footer-grid { display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:3rem; padding-bottom:3rem; position:relative; }
+.footer-logo { display:flex; align-items:center; gap:0.7rem; font-family:'Playfair Display',serif; font-size:1.15rem; color:white; font-weight:700; margin-bottom:1rem; }
+.footer-cross { color:var(--coral); font-size:1.3rem; }
+.footer-col > p { font-size:0.92rem; line-height:1.65; opacity:0.65; }
+.footer-redes { display:flex; gap:0.7rem; margin-top:1.2rem; }
+.footer-redes a { width:35px; height:35px; background:rgba(255,255,255,0.08); border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-size:0.85rem; transition:all 0.2s; }
+.footer-redes a:hover { background:var(--coral); transform:translateY(-3px); }
+.footer-col h4 { color:white; font-family:'Playfair Display',serif; font-size:1.05rem; margin-bottom:1.2rem; }
+.footer-list { list-style:none; display:flex; flex-direction:column; gap:0.6rem; }
+.footer-list li { font-size:0.88rem; opacity:0.65; display:flex; align-items:flex-start; gap:0.6rem; line-height:1.4; }
+.footer-list li i { color:var(--coral); font-size:0.5rem; margin-top:0.45rem; flex-shrink:0; }
+.footer-bottom { border-top:1px solid rgba(255,255,255,0.07); padding:1.2rem 0; text-align:center; font-size:0.8rem; opacity:0.45; position:relative; }
+
+/* ---- NOTIFICACIONES ---- */
+.notificacion-compartir { position:fixed; bottom:-80px; left:50%; transform:translateX(-50%); background:var(--navy-mid); color:white; padding:0.9rem 2rem; border-radius:50px; font-size:0.9rem; font-weight:500; z-index:99999; transition:bottom 0.35s cubic-bezier(0.34,1.56,0.64,1); box-shadow:0 10px 35px rgba(0,0,0,0.3); white-space:nowrap; max-width:90vw; text-align:center; }
+.notificacion-compartir.show { bottom:2rem; }
+.notificacion-success { border-left:5px solid #27ae60; }
+.notificacion-error { border-left:5px solid #e74c3c; }
+.notificacion-info { border-left:5px solid var(--teal); }
+
+/* ---- MODAL SEGUIMIENTO ---- */
+.modal-seguimiento-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.65); backdrop-filter:blur(10px); z-index:10000; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity 0.3s; }
+.modal-seguimiento-overlay.show { opacity:1; pointer-events:all; }
+.modal-seguimiento-box { background:var(--white); border-radius:var(--radius-lg); padding:2.5rem; max-width:460px; width:92%; position:relative; border:2px solid var(--coral); box-shadow:0 30px 80px rgba(0,0,0,0.4); transform:scale(0.9) translateY(20px); transition:all 0.35s cubic-bezier(0.34,1.56,0.64,1); }
+.modal-seguimiento-overlay.show .modal-seguimiento-box { transform:scale(1) translateY(0); }
+.modal-seg-icon { width:62px; height:62px; background:linear-gradient(135deg,var(--coral),var(--coral-dark)); border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-size:1.5rem; margin:0 auto 1.2rem; }
+.modal-seg-titulo { font-size:1.45rem; text-align:center; margin-bottom:0.4rem; }
+.modal-seg-sub { text-align:center; color:var(--text-soft); font-size:0.92rem; margin-bottom:0.3rem; }
+.modal-seg-evento { text-align:center; font-weight:700; color:var(--coral); font-size:0.98rem; margin-bottom:1.5rem; }
+.modal-seg-warning { background:rgba(240,186,48,0.12); border:1px solid rgba(240,186,48,0.3); border-radius:10px; padding:0.7rem 1rem; font-size:0.83rem; color:var(--gold); margin-bottom:1.2rem; display:flex; align-items:center; gap:0.5rem; }
+.modal-seg-input { width:100%; padding:0.9rem 1.1rem; border:2px solid var(--border); border-radius:12px; font-size:0.98rem; background:var(--bg); color:var(--text); font-family:'Outfit',sans-serif; margin-bottom:1rem; transition:border-color 0.2s; }
+.modal-seg-input:focus { outline:none; border-color:var(--teal); background:var(--white); }
+.modal-seg-btns { display:flex; gap:0.8rem; }
+.modal-seg-confirm { flex:1; padding:0.9rem; background:linear-gradient(135deg,var(--coral),var(--coral-dark)); color:white; border:none; border-radius:12px; font-size:0.98rem; font-weight:700; cursor:pointer; font-family:'Outfit',sans-serif; transition:all 0.2s; }
+.modal-seg-confirm:hover { opacity:0.9; transform:translateY(-1px); }
+.modal-seg-cancel { padding:0.9rem 1.2rem; background:var(--bg-alt); color:var(--text-soft); border:1.5px solid var(--border); border-radius:12px; font-size:0.92rem; font-weight:600; cursor:pointer; font-family:'Outfit',sans-serif; transition:all 0.2s; }
+.modal-seg-cancel:hover { background:var(--border); }
+.modal-seg-close { position:absolute; top:14px; right:18px; font-size:1.6rem; background:none; border:none; color:var(--text-soft); cursor:pointer; line-height:1; transition:color 0.2s; }
+.modal-seg-close:hover { color:var(--coral); }
+
+/* ---- PARTICLES ---- */
+.particle { position:fixed; pointer-events:none; z-index:9998; border-radius:50%; animation:particle-fall linear forwards; }
+@keyframes particle-fall { 0%{transform:translateY(0) rotate(0deg);opacity:1} 100%{transform:translateY(100vh) rotate(720deg);opacity:0} }
+
+/* ---- SCROLL TOP ---- */
+.scroll-top { position:fixed; bottom:2rem; right:2rem; width:44px; height:44px; background:linear-gradient(135deg,var(--coral),var(--coral-dark)); color:white; border:none; border-radius:50%; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 24px var(--coral-glow); opacity:0; pointer-events:none; transition:all 0.3s; z-index:500; }
+.scroll-top.visible { opacity:1; pointer-events:all; }
+.scroll-top:hover { transform:translateY(-3px) scale(1.05); }
+
+/* ---- EVENTO DESTACADO ---- */
+.evento-destacado { outline:3px solid var(--coral); outline-offset:4px; animation:destacado-glow 2s ease; }
+@keyframes destacado-glow { 0%,100%{box-shadow:0 0 0 0 rgba(232,113,74,0)} 50%{box-shadow:0 0 0 10px rgba(232,113,74,0.25)} }
+
+/* ---- RESPONSIVE ---- */
+@media(max-width:1024px){ .footer-grid{grid-template-columns:1fr 1fr} }
+@media(max-width:768px){
+  .hamburger{display:flex}
+  .nav-links{position:fixed;top:var(--header-h);left:0;right:0;background:rgba(9,30,46,0.98);backdrop-filter:blur(10px);flex-direction:column;align-items:stretch;padding:1rem;gap:0.4rem;transform:translateY(-110%);transition:transform 0.3s;z-index:998;border-bottom:3px solid var(--coral)}
+  [data-theme="dark"] .nav-links{background:rgba(4,14,22,0.98)}
+  .nav-links.open{transform:translateY(0)}
+  .nav-link{padding:0.8rem 1rem;border-radius:10px}
+  .btn-dark-toggle{margin:0.5rem 0 0;width:100%;border-radius:10px;justify-content:center}
+  .hero{padding:3rem 0 2rem}
+  .hero-title{font-size:2.1rem}
+  .quienes-grid{grid-template-columns:1fr}
+  .quienes-img-wrap img{height:280px}
+  .stats-inner{gap:1.5rem}
+  .horario-block{flex-direction:column;text-align:center;gap:1rem}
+  .horario-items{justify-content:center}
+  .contacto-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr;gap:2rem}
+  .countdown-timer{gap:0.3rem}
+  .tiempo-bloque{padding:0.7rem 0.9rem;min-width:58px}
+  .tiempo-bloque span{font-size:1.6rem}
+  .tiempo-sep{font-size:1.4rem}
+  .section-header{padding-top:3rem}
+  .section-header h2{font-size:2.2rem}
+  .devocional-content{padding:1.5rem}
+  .devocional-footer{flex-direction:column}
+  .countdown-card{padding:1.8rem 1.5rem 1.5rem}
+  .cd-meeting-name{font-size:1.4rem}
+}
+@media(max-width:480px){
+  .hero-actions{flex-direction:column}
+  .btn-primary,.btn-secondary{width:100%;justify-content:center}
+  .redes-grid{grid-template-columns:1fr}
+  .cd-next-row{display:none}
+}
+  </style>
 </head>
 <body>
 
-<header>
+<!-- BARRA DE ANUNCIO -->
+<div class="anuncio-bar" id="anuncioBar">
+  <span class="anuncio-dot"></span>
+  <span><i class="fas fa-church"></i> &nbsp;<strong id="proximo-label">cargando...</strong> · <span id="countdown-bar">--:--:--</span></span>
+  <button class="anuncio-close" onclick="document.getElementById('anuncioBar').style.display='none'">×</button>
+</div>
+
+<!-- HEADER -->
+<header id="mainHeader">
   <div class="container header-flex">
-    <div class="logo-area">
-      <!-- Logo con círculo parpadeante -->
+    <div class="logo-area" onclick="window.mostrarSeccion && window.mostrarSeccion('inicio')">
       <div class="logo-container">
-        <img src="https://i.imgur.com/iy0iaQh.png" 
-             alt="Logo Iglesia" 
-             class="logo-svg">
-        <div class="pulse-circle"></div>
+        <div class="logo-icon">✝</div>
+        <div class="pulse-ring"></div>
       </div>
       <div class="logo-text">
-        <h1 class="glowing-text">Camino, Verdad y Vida</h1>
-        <span class="vivo-color">Gral. Alvear</span>
+        <h1>Camino, Verdad y Vida</h1>
+        <span class="badge-ciudad">Gral. Alvear</span>
       </div>
     </div>
+    <button class="hamburger" id="hamburger" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
     <nav class="nav-links" id="mainNav">
-      <a href="#inicio" class="active" data-section="inicio">Inicio</a>
-      <a href="#reuniones" data-section="reuniones">Reuniones</a>
-      <a href="#redes" data-section="redes">Redes</a>
-      <a href="#contacto" data-section="contacto">Contacto</a>
+      <a href="#inicio" class="nav-link active" data-section="inicio"><i class="fas fa-home"></i> Inicio</a>
+      <a href="#reuniones" class="nav-link" data-section="reuniones"><i class="fas fa-calendar-alt"></i> Reuniones</a>
+      <a href="#devocional" class="nav-link" data-section="devocional"><i class="fas fa-book-open"></i> Devocional</a>
+      <a href="#redes" class="nav-link" data-section="redes"><i class="fas fa-share-alt"></i> Redes</a>
+      <a href="#contacto" class="nav-link" data-section="contacto"><i class="fas fa-envelope"></i> Contacto</a>
+      <button class="btn-dark-toggle" id="darkToggle" title="Modo oscuro"><i class="fas fa-moon"></i></button>
     </nav>
   </div>
 </header>
 
-<!-- SECCIÓN INICIO -->
-<section id="inicio" class="section section-light section-active">
+<!-- ===== INICIO ===== -->
+<section id="inicio" class="section section-active">
+  <div class="hero">
+    <div class="hero-grid-lines"></div>
+    <div class="container hero-content">
+      <div class="hero-eyebrow"><i class="fas fa-dove"></i><span>IGLESIA CRISTIANA · GRAL. ALVEAR, MENDOZA</span></div>
+      <h2 class="hero-title">Bienvenidos a<br><em>Camino, Verdad y Vida</em></h2>
+      <p class="hero-verse" id="versoRotativo">"Yo soy el camino, la verdad y la vida" — Juan 14:6</p>
+      <div class="hero-tags">
+        <span>#SOMOSFAMILIA</span><span>#SOMOSIGLESIA</span><span>#COMUNIDAD</span>
+      </div>
+      <div class="hero-actions">
+        <a href="#reuniones" class="btn-primary nav-trigger" data-section="reuniones"><i class="fas fa-calendar-check"></i> Ver Reuniones</a>
+        <a href="#contacto" class="btn-secondary nav-trigger" data-section="contacto"><i class="fas fa-map-marker-alt"></i> Cómo Llegar</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- COUNTDOWN CARD -->
+  <div class="container countdown-section">
+    <div class="countdown-card" id="countdownCard">
+      <div class="cd-status-badge" id="cdStatusBadge">
+        <span class="cd-dot"></span>
+        <span id="cdStatusText">PRÓXIMA REUNIÓN</span>
+      </div>
+      <div class="cd-meeting-name" id="cd-meeting-name">Cargando...</div>
+      <div class="cd-meeting-info" id="cd-meeting-info">
+        <span><i class="fas fa-clock"></i> <span id="cd-horario">--:-- hs</span></span>
+        <span>·</span>
+        <span><i class="fas fa-map-pin"></i> <span id="cd-lugar">---</span></span>
+      </div>
+      <div class="countdown-timer">
+        <div class="tiempo-bloque" id="bloque-dias"><span id="cd-dias">00</span><small>días</small></div>
+        <div class="tiempo-sep">:</div>
+        <div class="tiempo-bloque" id="bloque-horas"><span id="cd-horas">00</span><small>horas</small></div>
+        <div class="tiempo-sep">:</div>
+        <div class="tiempo-bloque" id="bloque-min"><span id="cd-min">00</span><small>min</small></div>
+        <div class="tiempo-sep">:</div>
+        <div class="tiempo-bloque" id="bloque-seg"><span id="cd-seg">00</span><small>seg</small></div>
+      </div>
+      <div class="cd-progress-wrap">
+        <div class="cd-progress-label">
+          <span id="cdProgressLeft">Esta semana</span>
+          <span id="cdProgressRight"></span>
+        </div>
+        <div class="cd-progress-bar"><div class="cd-progress-fill" id="cdProgressFill" style="width:0%"></div></div>
+      </div>
+      <div class="cd-next-row" id="cdNextRow"></div>
+    </div>
+  </div>
+
   <div class="container">
-    <!-- Cartel de Bienvenidos MEJORADO (una línea) -->
-    <div class="welcome-banner">
-      <h2 class="elegant-title">
-        ¡HOLA! Bienvenidos a <span class="highlight">Camino, Verdad y Vida</span> <span class="alvear">Gral. Alvear</span>
-      </h2>
-      <div class="stars-decoration">
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
+    <div class="quienes-grid">
+      <div class="quienes-img-wrap">
+        <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=700&h=500&fit=crop" alt="Familia de fe">
+        <div class="img-overlay-badge"><i class="fas fa-users"></i><span>Familia de Fe</span></div>
+      </div>
+      <div class="quienes-texto">
+        <div class="seccion-etiqueta">¿Quiénes Somos?</div>
+        <h3>Un lugar donde serás <em>bienvenido, amado</em> y desafiado a seguir a Jesús</h3>
+        <p>Somos una familia de fe que se reúne para adorar a Dios, crecer en su Palabra y compartir su amor con nuestra comunidad.</p>
+        <p>Nuestra misión es llevar el mensaje de esperanza a cada persona, acompañándola en su camino de fe y sirviendo a nuestra ciudad con amor y dedicación.</p>
+        <div class="valores-row">
+          <div class="valor-chip"><i class="fas fa-heart"></i> Fe</div>
+          <div class="valor-chip"><i class="fas fa-hands-helping"></i> Comunidad</div>
+          <div class="valor-chip"><i class="fas fa-dove"></i> Esperanza</div>
+          <div class="valor-chip"><i class="fas fa-book"></i> Palabra</div>
+        </div>
+        <p class="quienes-cta"><i class="fas fa-door-open"></i> <strong>¡Te esperamos cada domingo a las 10:00hs!</strong></p>
       </div>
     </div>
-    
-    <!-- Lema con colores suaves -->
-    <div class="lema-container">
-      <p class="lema-text-soft">#SOMOSFAMILIA · #SOMOSIGLESIA</p>
-    </div>
-    
-    <!-- Sección ¿Quiénes Somos? -->
-    <div class="quienes-somos">
-      <div class="quienes-img">
-        <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=600&h=400&fit=crop" alt="Familia en iglesia">
-      </div>
-      <div class="quienes-content">
-        <h3>¿Quiénes Somos?</h3>
-        <p>Somos una familia de fe que se reúne para adorar a Dios, crecer en su Palabra y compartir su amor con nuestra comunidad. En <strong>Camino, Verdad y Vida</strong> encontrarás un lugar donde ser bienvenido, amado y desafiado a seguir a Jesús.</p>
-        <p>Nuestra misión es llevar el mensaje de esperanza a cada persona, acompañándolas en su camino de fe y sirviendo a nuestra ciudad con amor y dedicación.</p>
-        <p><i class="fas fa-heart" style="color: var(--coral);"></i> ¡Te esperamos!</p>
-      </div>
+  </div>
+
+  <div class="stats-strip">
+    <div class="container stats-inner">
+      <div class="stat-item"><span class="stat-num">+10</span><span class="stat-label">años de ministerio</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat-item"><span class="stat-num">4</span><span class="stat-label">reuniones semanales</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat-item"><span class="stat-num">∞</span><span class="stat-label">amor de Dios</span></div>
     </div>
   </div>
 </section>
 
-<!-- SECCIÓN REUNIONES -->
-<section id="reuniones" class="section section-light">
+<!-- ===== REUNIONES ===== -->
+<section id="reuniones" class="section">
   <div class="container">
     <div class="section-header">
+      <div class="seccion-etiqueta"><i class="fas fa-calendar-alt"></i> Agenda</div>
       <h2>Reuniones & Actividades</h2>
+      <p class="section-sub">Unite a nosotros en cualquiera de nuestros encuentros semanales</p>
     </div>
-    <div class="event-grid" id="eventos-container">
-      <!-- Los eventos se cargarán dinámicamente con JavaScript -->
-    </div>
-
-    <!-- HORARIO DESTACADO -->
+    <div class="event-grid" id="eventos-container"></div>
     <div class="horario-block">
-      <p><i class="fas fa-calendar-check"></i> HORARIOS DE REUNIONES <i class="fas fa-calendar-check"></i></p>
-      <p style="font-size: 1.8rem; background: white; color: #227399; padding: 0.5rem; border-radius: 60px;">· DOM 10:00 · MIÉ 20:30 ·</p>
+      <div class="horario-icon"><i class="fas fa-clock"></i></div>
+      <div class="horario-info">
+        <p class="horario-titulo">Horarios Regulares</p>
+        <div class="horario-items">
+          <div class="horario-item"><span class="dia-badge">DOM</span><span class="horario-hora">10:00 hs</span><span class="horario-desc">Reunión General</span></div>
+          <div class="horario-item"><span class="dia-badge">MIÉ</span><span class="horario-hora">20:30 hs</span><span class="horario-desc">Reunión General & Estudio Biblico</span></div>
+          <div class="horario-item"><span class="dia-badge">VIE</span><span class="horario-hora">18:30 hs</span><span class="horario-desc">Escuela Biblica - CVV Kids</span></div>
+          <div class="horario-item"><span class="dia-badge">VIE</span><span class="horario-hora">21:00 hs</span><span class="horario-desc">Jóvenes & Adolescentes</span></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- SECCIÓN REDES -->
-<section id="redes" class="section section-muted">
+<!-- ===== DEVOCIONAL ===== -->
+<section id="devocional" class="section">
   <div class="container">
     <div class="section-header">
+      <div class="seccion-etiqueta"><i class="fas fa-book-open"></i> Palabra de Hoy</div>
+      <h2>Devocional Diario</h2>
+      <p class="section-sub">Un versículo y reflexión para alimentar tu fe cada día</p>
+    </div>
+    <div class="devocional-card" id="devocionalCard">
+      <div class="devocional-header" id="devocionalHeader" style="display:none">
+        <span class="devocional-header-icon">📖</span>
+        <h3>Devocional del Día</h3>
+        <p class="devocional-fecha" id="devocionalFecha"></p>
+        <span class="dev-dia-badge" id="devocionalDiaBadge"></span>
+      </div>
+      <div class="devocional-loading" id="devocionalLoading">
+        <div class="cross-spinner">✝</div>
+        <p>Cargando la Palabra para hoy...</p>
+      </div>
+      <div class="devocional-content" id="devocionalContent" style="display:none">
+        <div class="versiculo-box">
+          <i class="fas fa-quote-left quote-icon"></i>
+          <p class="versiculo-texto" id="versiculoTexto"></p>
+          <p class="versiculo-ref" id="versiculoRef"></p>
+        </div>
+        <div class="reflexion-box">
+          <h4><i class="fas fa-lightbulb"></i> Reflexión de hoy</h4>
+          <p id="reflexionTexto"></p>
+        </div>
+        <div class="oracion-box">
+          <h4><i class="fas fa-praying-hands"></i> Oración</h4>
+          <p id="oracionTexto"></p>
+        </div>
+        <div class="devocional-footer">
+          <button class="btn-nuevo-devocional" id="btnNuevoDevocional"><i class="fas fa-sync-alt"></i> Nuevo Devocional</button>
+          <button class="btn-compartir-dev" id="btnCompartirDev"><i class="fas fa-share-alt"></i> Compartir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== REDES ===== -->
+<section id="redes" class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="seccion-etiqueta"><i class="fas fa-share-alt"></i> Conectate</div>
       <h2>Redes Sociales</h2>
+      <p class="section-sub">¡Seguinos y no te pierdas ninguna novedad ni nuestros próximos eventos!</p>
     </div>
     <div class="redes-grid">
-      <a href="https://www.instagram.com/cvv_alvear/" target="_blank" class="red-item">
-        <i class="fab fa-instagram"></i>
-        <span>IG</span>
+      <a href="https://www.instagram.com/cvv_alvear/" target="_blank" class="red-card instagram">
+        <div class="red-icon-wrap"><i class="fab fa-instagram"></i></div>
+        <div class="red-info"><strong>Instagram</strong><span>@cvv_alvear</span></div>
+        <div class="red-arrow"><i class="fas fa-arrow-right"></i></div>
       </a>
-      <a href="https://www.youtube.com/@CVV_Alvear" target="_blank" class="red-item">
-        <i class="fab fa-youtube"></i>
-        <span>YT</span>
+      <a href="https://www.youtube.com/@CVV_Alvear" target="_blank" class="red-card youtube">
+        <div class="red-icon-wrap"><i class="fab fa-youtube"></i></div>
+        <div class="red-info"><strong>YouTube</strong><span>CVV Alvear</span></div>
+        <div class="red-arrow"><i class="fas fa-arrow-right"></i></div>
       </a>
-      <a href="https://www.facebook.com/igledelafamilia?locale=es_LA" target="_blank" class="red-item">
-        <i class="fab fa-facebook-f"></i>
-        <span>FB</span>
+      <a href="https://www.facebook.com/igledelafamilia?locale=es_LA" target="_blank" class="red-card facebook">
+        <div class="red-icon-wrap"><i class="fab fa-facebook-f"></i></div>
+        <div class="red-info"><strong>Facebook</strong><span>Iglesia de la Familia</span></div>
+        <div class="red-arrow"><i class="fas fa-arrow-right"></i></div>
+      </a>
+      <a href="https://wa.me/542625597432" target="_blank" class="red-card whatsapp">
+        <div class="red-icon-wrap"><i class="fab fa-whatsapp"></i></div>
+        <div class="red-info"><strong>WhatsApp</strong><span>(2625) 59-7432</span></div>
+        <div class="red-arrow"><i class="fas fa-arrow-right"></i></div>
       </a>
     </div>
-    <p style="text-align: center; font-size: 1.2rem; margin-top: 2rem;">📢 ¡Seguinos y no te pierdas ninguna novedad ni nuestros próximos eventos!</p>
   </div>
 </section>
 
-<!-- SECCIÓN CONTACTO -->
-<section id="contacto" class="section section-light">
+<!-- ===== CONTACTO ===== -->
+<section id="contacto" class="section">
   <div class="container">
     <div class="section-header">
-      <h2>Contacto</h2>
+      <div class="seccion-etiqueta"><i class="fas fa-map-marker-alt"></i> Estamos aquí</div>
+      <h2>Contacto & Ubicación</h2>
+      <p class="section-sub">Encontranos en el corazón de General Alvear</p>
     </div>
-    <div class="contact-row">
-      <div class="contact-card">
-        <i class="fas fa-map-marker-alt"></i>
-        <h4>Dirección</h4>
-        <p>Calle Rio Mendoza 554, Gral. Alvear, Mendoza</p>
+    <div class="contacto-grid">
+      <div class="contacto-info">
+        <div class="info-card">
+          <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div><h4>Dirección</h4><p>Calle Rio Mendoza 554<br>Gral. Alvear, Mendoza</p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+          <div><h4>Teléfono</h4><p><a href="tel:+542625597432">(2625) 59-7432</a></p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon"><i class="fas fa-envelope"></i></div>
+          <div><h4>Email</h4><p><a href="mailto:cvvmultimedia@gmail.com">cvvmultimedia@gmail.com</a></p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon"><i class="fas fa-clock"></i></div>
+          <div><h4>Horarios</h4><p>Dom 10:00 · Mié 20:30 · Vie 18:30 & 21:00</p></div>
+        </div>
+        <div class="contacto-form">
+          <h4><i class="fas fa-paper-plane"></i> Envianos un mensaje</h4>
+          <div class="form-group"><input type="text" id="form-nombre" placeholder="Tu nombre" /></div>
+          <div class="form-group"><input type="email" id="form-email" placeholder="Tu email" /></div>
+          <div class="form-group"><textarea id="form-mensaje" placeholder="¿En qué podemos ayudarte?" rows="3"></textarea></div>
+          <button class="btn-enviar" id="btnEnviar"><i class="fas fa-paper-plane"></i> Enviar mensaje</button>
+        </div>
       </div>
-      <div class="contact-card">
-        <i class="fas fa-phone-alt"></i>
-        <h4>Teléfono</h4>
-        <p>(2625) 59-7432</p>
-      </div>
-      <div class="contact-card">
-        <i class="fas fa-envelope"></i>
-        <h4>Email</h4>
-        <p>cvvmultimedia@gmail.com</p>
+      <div class="mapa-wrap">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3107.172857190166!2d-67.68328502444079!3d-34.983766172820445!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967817963026d683%3A0xba08c878a3bbed8b!2sIglesia%20de%20la%20familia%20-%20Restaurando%20el%20hogar!5e1!3m2!1ses-419!2sar!4v1779373242753!5m2!1ses-419!2sar"
+          width="100%" height="420" style="border:0;border-radius:20px 20px 0 0" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade" title="Ubicación de la iglesia"></iframe>
+        <a href="https://maps.google.com/?q=Rio+Mendoza+554,+General+Alvear,+Mendoza" target="_blank" class="btn-mapa">
+          <i class="fas fa-directions"></i> Cómo llegar
+        </a>
       </div>
     </div>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
   <div class="container footer-grid">
     <div class="footer-col">
-      <h4>Camino, Verdad y Vida</h4>
-      <p><i class="fas fa-map-pin"></i> Calle Rio Mendoza 554, Gral. Alvear, Mendoza</p>
-      <p><i class="fas fa-phone"></i> (2625) 59-7432</p>
-      <p><i class="fas fa-envelope"></i> cvvmultimedia@gmail.com</p>
+      <div class="footer-logo"><span class="footer-cross">✝</span><span>Camino, Verdad y Vida</span></div>
+      <p>Una comunidad de fe en el corazón de General Alvear, Mendoza.</p>
+      <div class="footer-redes">
+        <a href="https://www.instagram.com/cvv_alvear/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com/@CVV_Alvear" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.facebook.com/igledelafamilia" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://wa.me/542625597432" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      </div>
     </div>
     <div class="footer-col">
       <h4>Horarios</h4>
-      <p>Dom 10:00 · Mié 20:30</p>
-      <p>Vier 21:00 · Jovenes y Adolescentes</p>
+      <ul class="footer-list">
+        <li><i class="fas fa-circle"></i> Dom 10:00 · Reunión General</li>
+        <li><i class="fas fa-circle"></i> Mié 20:30 · Reunión General</li>
+        <li><i class="fas fa-circle"></i> Vie 18:30 · CVV Kids</li>
+        <li><i class="fas fa-circle"></i> Vie 21:00 · Jóvenes</li>
+      </ul>
     </div>
     <div class="footer-col">
-      <h4>Redes</h4>
-      <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
-      <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
-      <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+      <h4>Contacto</h4>
+      <ul class="footer-list">
+        <li><i class="fas fa-map-pin"></i> Rio Mendoza 554, Gral. Alvear</li>
+        <li><i class="fas fa-phone"></i> (2625) 59-7432</li>
+        <li><i class="fas fa-envelope"></i> cvvmultimedia@gmail.com</li>
+      </ul>
     </div>
   </div>
-  <div class="copyright">
-    <p>© 2026 Iglesia Cristiana Camino, Verdad y Vida · Gral. Alvear · Todos los derechos reservados.</p>
+  <div class="footer-bottom">
+    <p>© 2026 Iglesia Cristiana Camino, Verdad y Vida · Gral. Alvear · Hecho con ❤️ para la gloria de Dios</p>
   </div>
 </footer>
 
-<!-- Script principal -->
-<script src="script.js"></script>
+<!-- SCROLL TOP -->
+<button class="scroll-top" id="scrollTop" title="Volver arriba"><i class="fas fa-chevron-up"></i></button>
+
+<!-- MODAL SEGUIMIENTO -->
+<div class="modal-seguimiento-overlay" id="modalSeguimientoOverlay">
+  <div class="modal-seguimiento-box" id="modalSeguimientoBox">
+    <button class="modal-seg-close" id="modalSegClose">×</button>
+    <div class="modal-seg-icon"><i class="fas fa-bell"></i></div>
+    <h3 class="modal-seg-titulo">Seguir evento</h3>
+    <p class="modal-seg-sub">Recibirás una notificación por email cuando</p>
+    <p class="modal-seg-evento" id="modalSegEvento">este evento</p>
+    <p class="modal-seg-sub" style="margin-bottom:1.2rem">esté por comenzar.</p>
+    <div class="modal-seg-warning">
+      <i class="fas fa-exclamation-triangle"></i>
+      ¡Importante! Ingresá tu Gmail correctamente para recibir el aviso.
+    </div>
+    <input type="email" class="modal-seg-input" id="modalSegEmail" placeholder="tu@gmail.com" />
+    <div class="modal-seg-btns">
+      <button class="modal-seg-cancel" id="modalSegCancel">Cancelar</button>
+      <button class="modal-seg-confirm" id="modalSegConfirm"><i class="fas fa-bell"></i> Confirmar seguimiento</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// ★★★ REUNIONES SEMANALES — EDITÁ SOLO ESTA SECCIÓN ★★★
+// Para agregar/quitar reuniones, modificá este array.
+// diaSemana: 0=Dom, 1=Lun, 2=Mar, 3=Mié, 4=Jue, 5=Vie, 6=Sáb
+// duracionMin: duración en minutos (por defecto 120 si no se define)
+// ============================================================
+const REUNIONES_SEMANALES = [
+  {
+    id: 'domingo',
+    nombre: 'Reunión General — Domingo',
+    diaSemana: 0,
+    hora: 10, min: 0,
+    duracionMin: 120,
+    lugar: 'Rio Mendoza 554',
+    icono: '🙏'
+  },
+  {
+    id: 'miercoles',
+    nombre: 'Reunión General — Miércoles',
+    diaSemana: 3,
+    hora: 20, min: 30,
+    duracionMin: 120,
+    lugar: 'Rio Mendoza 554',
+    icono: '✝'
+  },
+  {
+    id: 'kids',
+    nombre: 'CVV Kids',
+    diaSemana: 5,
+    hora: 18, min: 30,
+    duracionMin: 90,
+    lugar: 'Rio Mendoza 554',
+    icono: '⭐'
+  },
+  {
+    id: 'jovenes',
+    nombre: 'Reunión de Jóvenes',
+    diaSemana: 5,
+    hora: 21, min: 0,
+    duracionMin: 120,
+    lugar: 'Rio Mendoza 554',
+    icono: '🔥'
+  }
+];
+// ============================================================
+// FIN DE SECCIÓN EDITABLE
+// ============================================================
+
+
+// ============================================================
+// MOTOR INTELIGENTE DEL COUNTDOWN
+// ============================================================
+const DIAS_ES = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+
+/**
+ * Calcula la próxima ocurrencia de una reunión semanal.
+ * @returns Date
+ */
+function proximaOcurrencia(reunion, desde = new Date()) {
+  const d = new Date(desde);
+  const hoyDia = d.getDay();
+  let diff = reunion.diaSemana - hoyDia;
+  if (diff < 0) diff += 7;
+  const fecha = new Date(d);
+  fecha.setDate(d.getDate() + diff);
+  fecha.setHours(reunion.hora, reunion.min, 0, 0);
+  // Si ya pasó (o está en curso y terminó), pasar a la semana que viene
+  const fin = new Date(fecha.getTime() + (reunion.duracionMin || 120) * 60000);
+  if (fin <= d) {
+    fecha.setDate(fecha.getDate() + 7);
+  }
+  return fecha;
+}
+
+/**
+ * Devuelve el estado actual del sistema de reuniones.
+ * Retorna el objeto de estado más relevante para mostrar.
+ */
+function calcularEstadoCountdown() {
+  const ahora = new Date();
+
+  // 1. ¿Hay alguna reunión EN CURSO ahora mismo?
+  for (const r of REUNIONES_SEMANALES) {
+    const prox = proximaOcurrencia(r, new Date(ahora.getTime() - (r.duracionMin || 120) * 60000 - 1000));
+    const inicio = new Date(prox);
+    // Recalcular el inicio real (puede que proximaOcurrencia lo haya empujado)
+    const startToday = new Date(ahora);
+    startToday.setHours(0,0,0,0);
+    // Iterar últimas 2 semanas para encontrar la ocurrencia más reciente anterior a ahora
+    for (let w = 0; w <= 1; w++) {
+      const candidato = new Date(ahora);
+      let diff = r.diaSemana - ahora.getDay();
+      // semana anterior
+      candidato.setDate(ahora.getDate() + diff - (w * 7));
+      candidato.setHours(r.hora, r.min, 0, 0);
+      const finCandidato = new Date(candidato.getTime() + (r.duracionMin || 120) * 60000);
+      if (candidato <= ahora && ahora < finCandidato) {
+        // ¡Reunión en curso!
+        const msRestantes = finCandidato - ahora;
+        const siguiente = calcularSiguiente(r, finCandidato);
+        return {
+          tipo: 'en_curso',
+          reunion: r,
+          msRestantes: msRestantes,
+          finReunion: finCandidato,
+          siguiente: siguiente
+        };
+      }
+    }
+  }
+
+  // 2. No hay ninguna en curso — buscar la próxima
+  let menorDiff = null;
+  let proximaReunion = null;
+  let proximaFecha = null;
+  for (const r of REUNIONES_SEMANALES) {
+    const fecha = proximaOcurrencia(r, ahora);
+    const diff = fecha - ahora;
+    if (menorDiff === null || diff < menorDiff) {
+      menorDiff = diff;
+      proximaReunion = r;
+      proximaFecha = fecha;
+    }
+  }
+  return {
+    tipo: 'proxima',
+    reunion: proximaReunion,
+    msRestantes: menorDiff,
+    fechaInicio: proximaFecha,
+    siguiente: calcularSiguiente(proximaReunion, proximaFecha)
+  };
+}
+
+function calcularSiguiente(reunionActual, despuesDe) {
+  let menorDiff = null;
+  let sig = null;
+  let sigFecha = null;
+  for (const r of REUNIONES_SEMANALES) {
+    // Buscar próxima DESPUÉS del fin de la actual
+    const fecha = proximaOcurrencia(r, despuesDe);
+    const diff = fecha - despuesDe;
+    if (menorDiff === null || diff < menorDiff) {
+      menorDiff = diff;
+      sig = r;
+      sigFecha = fecha;
+    }
+  }
+  return { reunion: sig, fecha: sigFecha };
+}
+
+// Guardamos el estado previo para detectar transiciones
+let _estadoPrevio = null;
+let _prevSeg = -1;
+
+function actualizarCountdown() {
+  const ahora = new Date();
+  const estado = calcularEstadoCountdown();
+
+  const card = document.getElementById('countdownCard');
+  const badge = document.getElementById('cdStatusBadge');
+  const statusText = document.getElementById('cdStatusText');
+  const meetingName = document.getElementById('cd-meeting-name');
+  const infoHorario = document.getElementById('cd-horario');
+  const infoLugar = document.getElementById('cd-lugar');
+  const nextRow = document.getElementById('cdNextRow');
+  const progressFill = document.getElementById('cdProgressFill');
+  const progressLeft = document.getElementById('cdProgressLeft');
+  const progressRight = document.getElementById('cdProgressRight');
+
+  if (!card) return;
+
+  const r = estado.reunion;
+  const ms = estado.msRestantes;
+  const totalSeg = Math.max(0, Math.floor(ms / 1000));
+  const dias = Math.floor(totalSeg / 86400);
+  const horas = Math.floor((totalSeg % 86400) / 3600);
+  const minutos = Math.floor((totalSeg % 3600) / 60);
+  const segundos = totalSeg % 60;
+
+  // Actualizar nombre e info
+  const nuevoNombre = (r.icono ? r.icono + ' ' : '') + r.nombre;
+  if (meetingName.textContent !== nuevoNombre) {
+    meetingName.style.opacity = '0';
+    setTimeout(() => {
+      meetingName.textContent = nuevoNombre;
+      meetingName.style.opacity = '1';
+      meetingName.style.transition = 'opacity 0.4s';
+    }, 200);
+  }
+  infoHorario.textContent = String(r.hora).padStart(2,'0') + ':' + String(r.min).padStart(2,'0') + ' hs';
+  infoLugar.textContent = r.lugar || 'Rio Mendoza 554';
+
+  // Estado de la tarjeta
+  if (estado.tipo === 'en_curso') {
+    card.classList.add('en-curso');
+    badge.classList.add('en-curso');
+    statusText.textContent = '🔴 REUNIÓN EN CURSO';
+    progressLeft.textContent = 'Tiempo restante';
+    const durTotalMs = (r.duracionMin || 120) * 60000;
+    const pct = Math.max(0, Math.min(100, ((durTotalMs - ms) / durTotalMs) * 100));
+    progressFill.style.width = pct.toFixed(1) + '%';
+    progressRight.textContent = Math.ceil(ms / 60000) + ' min restantes';
+    // Mostrar siguiente
+    if (estado.siguiente && estado.siguiente.reunion) {
+      const sig = estado.siguiente.reunion;
+      const sigFecha = estado.siguiente.fecha;
+      const diaStr = DIAS_ES[sigFecha.getDay()];
+      nextRow.innerHTML = `<i class="fas fa-arrow-right"></i> Siguiente: <strong>${sig.nombre}</strong> — ${diaStr} ${String(sig.hora).padStart(2,'0')}:${String(sig.min).padStart(2,'0')}`;
+    }
+  } else {
+    card.classList.remove('en-curso');
+    badge.classList.remove('en-curso');
+    statusText.textContent = 'PRÓXIMA REUNIÓN';
+    // Progreso semanal (cuánto de los 7 días ya pasó hacia esta reunión)
+    const semanaMs = 7 * 24 * 3600000;
+    const pct = Math.max(0, Math.min(100, ((semanaMs - ms) / semanaMs) * 100));
+    progressFill.style.width = pct.toFixed(1) + '%';
+    const diaStr = DIAS_ES[estado.fechaInicio ? estado.fechaInicio.getDay() : r.diaSemana];
+    progressLeft.textContent = diaStr;
+    progressRight.textContent = dias > 0 ? `Faltan ${dias}d ${String(horas).padStart(2,'0')}h` : `Hoy ${String(horas).padStart(2,'0')}:${String(minutos).padStart(2,'0')}`;
+    // Siguiente después de esta
+    if (estado.siguiente && estado.siguiente.reunion) {
+      const sig = estado.siguiente.reunion;
+      const sigFecha = estado.siguiente.fecha;
+      const diaStr2 = DIAS_ES[sigFecha.getDay()];
+      nextRow.innerHTML = `<i class="fas fa-forward"></i> Luego: <strong>${sig.nombre}</strong> — ${diaStr2} ${String(sig.hora).padStart(2,'0')}:${String(sig.min).padStart(2,'0')}`;
+    }
+  }
+
+  // Números con animación de tick
+  function setBloque(id, bloqueId, val) {
+    const el = document.getElementById(id);
+    const bloque = document.getElementById(bloqueId);
+    const v = String(val).padStart(2, '0');
+    if (el && el.textContent !== v) {
+      el.textContent = v;
+      if (bloque) {
+        bloque.classList.remove('tick');
+        void bloque.offsetWidth;
+        bloque.classList.add('tick');
+      }
+    }
+  }
+
+  if (estado.tipo === 'en_curso') {
+    // En curso: mostrar tiempo restante
+    setBloque('cd-dias', 'bloque-dias', 0);
+    setBloque('cd-horas', 'bloque-horas', horas);
+    setBloque('cd-min', 'bloque-min', minutos);
+    setBloque('cd-seg', 'bloque-seg', segundos);
+    // Ocultar días
+    document.getElementById('bloque-dias').style.display = 'none';
+    document.querySelectorAll('.tiempo-sep')[0].style.display = 'none';
+  } else {
+    document.getElementById('bloque-dias').style.display = '';
+    document.querySelectorAll('.tiempo-sep')[0].style.display = '';
+    setBloque('cd-dias', 'bloque-dias', dias);
+    setBloque('cd-horas', 'bloque-horas', horas);
+    setBloque('cd-min', 'bloque-min', minutos);
+    setBloque('cd-seg', 'bloque-seg', segundos);
+  }
+
+  // Actualizar barra de anuncio
+  const labelEl = document.getElementById('proximo-label');
+  const barEl = document.getElementById('countdown-bar');
+  if (labelEl) {
+    if (estado.tipo === 'en_curso') {
+      labelEl.textContent = '🔴 ' + r.nombre + ' — EN CURSO';
+    } else {
+      labelEl.textContent = r.nombre;
+    }
+  }
+  if (barEl) {
+    if (estado.tipo === 'en_curso') {
+      const hStr = String(horas).padStart(2,'0'), mStr = String(minutos).padStart(2,'0'), sStr = String(segundos).padStart(2,'0');
+      barEl.textContent = `termina en ${hStr}:${mStr}:${sStr}`;
+    } else {
+      const hStr = String(horas).padStart(2,'0'), mStr = String(minutos).padStart(2,'0'), sStr = String(segundos).padStart(2,'0');
+      barEl.textContent = dias > 0 ? `${dias}d ${hStr}:${mStr}:${sStr}` : `${hStr}:${mStr}:${sStr}`;
+    }
+  }
+
+  // Detectar transición (terminó una reunión → avanzar automáticamente)
+  if (_estadoPrevio && _estadoPrevio.tipo === 'en_curso' && estado.tipo !== 'en_curso') {
+    // Transición: la reunión en curso terminó
+    mostrarNotificacion('✅ Reunión finalizada. ¡Que Dios te bendiga! 🙏', 'success');
+    lanzarParticulas(15);
+  }
+
+  _estadoPrevio = estado;
+}
+
+// ============================================================
+// DATOS DEVOCIONALES
+// ============================================================
+const devocionales = [
+  { versiculo: "Yo soy el camino, la verdad y la vida; nadie viene al Padre, sino por mí.", ref: "Juan 14:6", reflexion: "Jesús no solo muestra el camino, Él ES el camino. Cada día podemos andar con la certeza de que no caminamos solos, sino guiados por Aquel que conoce cada paso del sendero.", oracion: "Señor, gracias porque en ti encuentro dirección, verdad y vida verdadera. Guíame hoy con tu Espíritu." },
+  { versiculo: "Todo lo puedo en Cristo que me fortalece.", ref: "Filipenses 4:13", reflexion: "Esta promesa no habla de hacer cualquier cosa que deseemos, sino de poder enfrentar cada circunstancia —abundancia o necesidad— con la fortaleza que viene de Cristo.", oracion: "Padre, cuando me sienta débil, recuérdame que tu fuerza se perfecciona en mi debilidad." },
+  { versiculo: "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito.", ref: "Juan 3:16", reflexion: "El amor de Dios no fue una emoción pasajera: fue una entrega total. El regalo del Hijo es la prueba más grande de que somos amados con un amor eterno.", oracion: "Gracias, Dios, por amarme cuando era indigno de ser amado. Que ese amor cambie cada área de mi vida." },
+  { versiculo: "El Señor es mi pastor; nada me faltará.", ref: "Salmo 23:1", reflexion: "Cuando Dios es tu pastor, la provisión no depende de tus circunstancias sino de Su carácter. Hoy puedes descansar en Sus manos.", oracion: "Señor, confío en tu cuidado. Sé mi pastor en lo que no puedo ver ni controlar." },
+  { versiculo: "Mas buscad primeramente el reino de Dios y su justicia, y todas estas cosas os serán añadidas.", ref: "Mateo 6:33", reflexion: "La ansiedad por lo material desaparece cuando ponemos a Dios primero. No porque desaparezcan las necesidades, sino porque reconocemos quién las suple.", oracion: "Padre, hoy elijo buscarte a ti antes que a cualquier otra cosa. Sé el centro de mis prioridades." },
+  { versiculo: "El amor es sufrido, es benigno; el amor no tiene envidia.", ref: "1 Corintios 13:4", reflexion: "El amor verdadero no busca lo suyo: busca el bien del otro. Este versículo es un espejo que nos invita a examinar cómo amamos realmente.", oracion: "Señor, enséñame a amar como tú amas: sin condiciones, sin límites, con paciencia." },
+  { versiculo: "No os conforméis a este siglo, sino transformaos por medio de la renovación de vuestro entendimiento.", ref: "Romanos 12:2", reflexion: "La transformación cristiana comienza en la mente. Lo que pensamos moldea lo que somos. Hoy podemos elegir qué alimentamos en nuestra mente.", oracion: "Transforma mi mente, Señor. Que mis pensamientos sean guiados por tu Palabra y no por el mundo." },
+  { versiculo: "Encomienda a Jehová tu camino, y confía en él; y él hará.", ref: "Salmo 37:5", reflexion: "Encomendar no es resignarse: es poner activamente en manos de Dios lo que más nos importa, creyendo que Él actúa mejor que nosotros.", oracion: "Hoy te entrego mis planes, mis miedos y mis sueños. Confío en que tú sabes qué es lo mejor para mí." },
+  { versiculo: "Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar.", ref: "Mateo 11:28", reflexion: "Jesús invita a los cansados. No a los perfectos, no a los fuertes: a los que cargaron demasiado. Su yugo alivia porque Él lo comparte con nosotros.", oracion: "Señor, deposito ante ti mis cargas hoy. Recibo el descanso que prometes para mi alma." },
+  { versiculo: "El que comenzó en vosotros la buena obra, la perfeccionará hasta el día de Jesucristo.", ref: "Filipenses 1:6", reflexion: "Dios no abandona lo que comenzó. Si a veces sentimos que no avanzamos, recordemos que Él es fiel para completar la obra en nosotros.", oracion: "Gracias, Padre, porque no me dejas a medias. Confío en que seguirás obrando en mí." },
+  { versiculo: "La paz os dejo, mi paz os doy; yo no os la doy como el mundo la da.", ref: "Juan 14:27", reflexion: "La paz de Cristo no depende de las circunstancias externas. Es una paz que guarda el corazón incluso en medio de la tormenta.", oracion: "Jesús, dame hoy esa paz que sobrepasa todo entendimiento. Que reine en mi corazón." },
+  { versiculo: "Lámpara es a mis pies tu palabra, y lumbrera a mi camino.", ref: "Salmo 119:105", reflexion: "La Palabra no promete iluminar todo el horizonte, sino el paso siguiente. Eso es suficiente para caminar con fe.", oracion: "Señor, dame hambre por tu Palabra cada día. Que sea mi guía en cada decisión." },
+  { versiculo: "Dios es nuestro amparo y fortaleza, nuestro pronto auxilio en las tribulaciones.", ref: "Salmo 46:1", reflexion: "Las tribulaciones son reales, pero hay Uno más real aún que ellas: el Dios que es nuestra fortaleza. Él no llega tarde.", oracion: "Padre, cuando las dificultades me rodeen, recuérdame que tú eres mi refugio seguro." },
+  { versiculo: "Estad quietos, y conoced que yo soy Dios.", ref: "Salmo 46:10", reflexion: "El silencio ante Dios no es pasividad: es la forma más profunda de reconocer su soberanía. En la quietud, Dios se revela.", oracion: "Ayúdame a detenerme hoy, Señor. En medio del ruido, encontrar tu voz." },
+  { versiculo: "El amor perfecto echa fuera el temor.", ref: "1 Juan 4:18", reflexion: "Cuanto más comprendemos el amor de Dios, menos espacio tiene el miedo en nuestra vida. El antídoto del temor no es el valor, sino el amor.", oracion: "Señor, que tu amor llene cada rincón donde el miedo intenta entrar en mi vida." },
+  { versiculo: "¿Quién nos separará del amor de Cristo? Nada podrá separarnos.", ref: "Romanos 8:35,39", reflexion: "El amor de Dios no es frágil. Nada —ninguna circunstancia, ningún error, ningún enemigo— puede arrancarnos de Él.", oracion: "Gracias, Padre, porque tu amor me sostiene hoy. Que esa seguridad me dé libertad para vivir plenamente." },
+];
+
+// ============================================================
+// EVENTOS
+// ============================================================
+const eventosData = [
+  { id:"domingo", titulo:"Reunión General - Domingo", horario:"Domingos 10:00hs", lugar:"Rio Mendoza 554", descripcion:"Reunión General de Domingo, en comunión.", imagen:"https://i.imgur.com/5ZHRnXL.png", fechaInicio:null, fechaFin:null, etiqueta:{texto:"¡Todos los Domingos!",tipo:"verde"} },
+  { id:"miercoles", titulo:"Reunión General & Estudio Biblico - Miércoles", horario:"Miércoles 20:30hs", lugar:"Rio Mendoza 554", descripcion:"Reunión General de Miércoles donde se suma un estudio biblico.", imagen:"https://i.pinimg.com/736x/e7/19/1b/e7191bf84e8235e4c3fa0757b72c8203.jpg", fechaInicio:null, fechaFin:null, etiqueta:{texto:"¡Todos los Miercoles!",tipo:"verde"} },
+  { id:"jovenes", titulo:"Reunión de Jóvenes", horario:"Viernes 21:00hs", lugar:"Rio Mendoza 554", descripcion:"Alabanza, mensaje y Juegos. Traé tu mate 🧉", imagen:"https://i.imgur.com/OS9AjC7.png", fechaInicio:null, fechaFin:null, etiqueta:{texto:"¡Todos los Viernes!",tipo:"verde"} },
+  { id:"kids", titulo:"Escuela Bíblica - CVV Kids", horario:"Viernes 18:30hs", lugar:"Rio Mendoza 554", descripcion:"Un lugar para que los peques puedan compartir y aprender de la palabra de Dios.", imagen:"https://i.pinimg.com/1200x/f3/76/b0/f376b044f80a9fa6c2471ad83de7c534.jpg", fechaInicio:null, fechaFin:null, etiqueta:{texto:"¡Todos los Viernes!",tipo:"verde"} },
+  { id:"bautismo", titulo:"Bautismo en Aguas", horario:"Finalizado", lugar:"Complejo Los Teritos - Gral. Alvear", descripcion:"El Bautismo en Aguas representa la decisión de seguir a Jesús y comenzar una nueva vida en Él.", imagen:"https://i.pinimg.com/736x/fb/2f/d7/fb2fd7cda4bb3579d195d1c916eadc40.jpg", fechaInicio:"2026-04-01T10:00:00", fechaFin:"2026-04-01T13:00:00", etiqueta:"" },
+];
+
+// ============================================================
+// DEVOCIONAL
+// ============================================================
+let devocionalActual = null;
+let indexDevocionalActual = 0;
+
+function getDevocionalDelDia() {
+  const hoy = new Date();
+  const startOfYear = new Date(hoy.getFullYear(), 0, 0);
+  const diff = hoy - startOfYear;
+  const oneDay = 1000 * 60 * 60 * 24;
+  const dayOfYear = Math.floor(diff / oneDay);
+  return dayOfYear % devocionales.length;
+}
+
+function formatearFecha(fecha) {
+  const dias = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+  const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  return `${dias[fecha.getDay()]} ${fecha.getDate()} de ${meses[fecha.getMonth()]} de ${fecha.getFullYear()}`;
+}
+
+function mostrarDevocional(idx) {
+  const dev = devocionales[idx];
+  devocionalActual = dev;
+  indexDevocionalActual = idx;
+  document.getElementById('versiculoTexto').textContent = dev.versiculo;
+  document.getElementById('versiculoRef').textContent = '— ' + dev.ref;
+  document.getElementById('reflexionTexto').textContent = dev.reflexion;
+  document.getElementById('oracionTexto').textContent = dev.oracion;
+  const hoy = new Date();
+  document.getElementById('devocionalFecha').textContent = formatearFecha(hoy);
+  document.getElementById('devocionalDiaBadge').textContent = 'Día ' + (idx + 1);
+  document.getElementById('devocionalLoading').style.display = 'none';
+  document.getElementById('devocionalHeader').style.display = 'block';
+  document.getElementById('devocionalContent').style.display = 'block';
+}
+
+function initDevocional() {
+  setTimeout(() => {
+    const idx = getDevocionalDelDia();
+    mostrarDevocional(idx);
+  }, 800);
+  const btnNuevo = document.getElementById('btnNuevoDevocional');
+  if (btnNuevo) {
+    btnNuevo.addEventListener('click', () => {
+      const nuevoIdx = (indexDevocionalActual + 1) % devocionales.length;
+      document.getElementById('devocionalContent').style.display = 'none';
+      document.getElementById('devocionalHeader').style.display = 'none';
+      document.getElementById('devocionalLoading').style.display = 'block';
+      setTimeout(() => mostrarDevocional(nuevoIdx), 600);
+    });
+  }
+  const btnCompartir = document.getElementById('btnCompartirDev');
+  if (btnCompartir) {
+    btnCompartir.addEventListener('click', () => {
+      if (!devocionalActual) return;
+      const texto = `📖 ${devocionalActual.versiculo}\n— ${devocionalActual.ref}\n\nVía: Iglesia Camino, Verdad y Vida · Gral. Alvear`;
+      if (navigator.share) {
+        navigator.share({ title: 'Devocional del Día', text: texto }).catch(() => {});
+      } else {
+        navigator.clipboard.writeText(texto).then(() => mostrarNotificacion('📋 Versículo copiado al portapapeles', 'success'));
+      }
+    });
+  }
+}
+
+// ============================================================
+// SEGUIMIENTOS
+// ============================================================
+let eventosSeguidos = {};
+try { eventosSeguidos = JSON.parse(localStorage.getItem('eventosSeguidos') || '{}'); } catch(e) {}
+function guardarSeguimientos() { try { localStorage.setItem('eventosSeguidos', JSON.stringify(eventosSeguidos)); } catch(e) {} }
+function isEventoSeguido(id) { return !!eventosSeguidos[id]; }
+function seguirEvento(id, titulo, fechaInicio, email) {
+  eventosSeguidos[id] = { titulo, fechaInicio, email, notificadoInicio: false };
+  guardarSeguimientos();
+  mostrarNotificacion('🔔 Siguiendo: ' + titulo, 'success');
+}
+function dejarDeSeguirEvento(id) {
+  delete eventosSeguidos[id];
+  guardarSeguimientos();
+}
+
+// ============================================================
+// CARGAR EVENTOS
+// ============================================================
+function formatearContador(ms) {
+  if (ms <= 0) return null;
+  const s = Math.floor(ms/1000), m = Math.floor(s/60), h = Math.floor(m/60), d = Math.floor(h/24);
+  if (d > 0) return `${d} día${d>1?'s':''}`;
+  if (h > 0) return `${h} hora${h>1?'s':''}`;
+  if (m > 0) return `${m} minuto${m>1?'s':''}`;
+  return `${s} segundo${s>1?'s':''}`;
+}
+
+function getEstadoEvento(inicio, fin) {
+  if (!inicio) return {tipo:'normal',texto:''};
+  const ahora = new Date(), fechaInicio = new Date(inicio);
+  const fechaFin = fin ? new Date(fin) : new Date(fechaInicio.getTime() + 3*60*60*1000);
+  if (ahora > fechaFin) return {tipo:'finalizado',texto:'FINALIZADO'};
+  if (ahora >= fechaInicio && ahora <= fechaFin) return {tipo:'curso',texto:'🔴 EN CURSO'};
+  if (ahora < fechaInicio) { const c = formatearContador(fechaInicio - ahora); return {tipo:'proximo',texto:`⏳ Inicia en ${c}`}; }
+  return {tipo:'normal',texto:''};
+}
+
+function cargarEventos() {
+  const container = document.getElementById('eventos-container');
+  if (!container) return;
+  container.innerHTML = '';
+  eventosData.forEach(evento => {
+    const card = document.createElement('div');
+    card.className = 'event-card';
+    card.setAttribute('data-evento-id', evento.id);
+    let estado = {tipo:'normal',texto:''};
+    if (evento.fechaInicio) estado = getEstadoEvento(evento.fechaInicio, evento.fechaFin);
+    let etiquetaTexto = '', etiquetaClase = '';
+    if (evento.etiqueta && evento.etiqueta !== '') {
+      if (typeof evento.etiqueta === 'object') {
+        etiquetaTexto = evento.etiqueta.texto;
+        etiquetaClase = evento.etiqueta.tipo === 'verde' ? 'etiqueta-verde' : evento.etiqueta.tipo === 'amarillo' ? 'etiqueta-amarillo' : 'etiqueta-rojo';
+      } else { etiquetaTexto = evento.etiqueta; etiquetaClase = 'etiqueta-rojo'; }
+    } else if (estado.texto) {
+      etiquetaTexto = estado.texto;
+      if (estado.tipo === 'finalizado') { etiquetaClase = 'etiqueta-rojo'; card.classList.add('evento-finalizado'); }
+      else if (estado.tipo === 'curso') { etiquetaClase = 'etiqueta-verde'; card.classList.add('evento-curso'); }
+      else if (estado.tipo === 'proximo') { etiquetaClase = 'etiqueta-amarillo'; }
+    }
+    let etiquetaHTML = etiquetaTexto ? `<span class="etiqueta-evento ${etiquetaClase}">${etiquetaTexto}</span>` : '';
+    let fechaInfo = '';
+    if (evento.fechaInicio) {
+      const f = new Date(evento.fechaInicio);
+      fechaInfo = `<div class="event-meta"><i class="fas fa-calendar-alt"></i> ${f.toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit',year:'2-digit'})}</div>`;
+    }
+    const tituloEsc = evento.titulo.replace(/'/g,"\\'");
+    const siguiendo = isEventoSeguido(evento.id);
+    card.innerHTML = `
+      <div class="event-img" style="background-image:linear-gradient(0deg,rgba(9,30,46,0.65),rgba(9,30,46,0.2)),url('${evento.imagen}');">
+        ${etiquetaHTML}
+      </div>
+      <div class="event-content">
+        <h3>${evento.titulo}</h3>
+        ${fechaInfo}
+        <div class="event-meta"><i class="fas fa-clock"></i> ${evento.horario}</div>
+        <div class="event-meta"><i class="fas fa-map-pin"></i> ${evento.lugar}</div>
+        <div class="event-desc">${evento.descripcion}</div>
+        <div class="event-actions">
+          <button class="btn-compartir" onclick="compartirEvento('${evento.id}','${tituloEsc}')"><i class="fas fa-share-alt"></i> Compartir</button>
+          <button class="btn-seguir ${siguiendo?'siguiendo':''}" onclick="toggleSeguirEvento('${evento.id}','${tituloEsc}','${evento.fechaInicio||''}')">
+            <i class="fas fa-bell"></i> ${siguiendo?'Siguiendo':'Seguir'}
+          </button>
+        </div>
+      </div>`;
+    container.appendChild(card);
+  });
+  destacarEventoDesdeUrl();
+}
+
+function destacarEventoDesdeUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('evento');
+  if (!id) return;
+  setTimeout(() => {
+    const el = document.querySelector(`[data-evento-id="${id}"]`);
+    if (el) {
+      el.scrollIntoView({behavior:'smooth',block:'center'});
+      el.classList.add('evento-destacado');
+      setTimeout(() => el.classList.remove('evento-destacado'), 3000);
+    }
+  }, 600);
+}
+
+// ============================================================
+// COMPARTIR
+// ============================================================
+function compartirEvento(eventoId, eventoTitulo) {
+  const url = new URL(window.location.href);
+  url.searchParams.set('evento', eventoId);
+  if (navigator.share) {
+    navigator.share({ title:eventoTitulo, text:'Mirá este evento de Camino, Verdad y Vida:', url:url.toString() }).catch(() => copiarAlPortapapeles(url.toString(), eventoTitulo));
+  } else {
+    copiarAlPortapapeles(url.toString(), eventoTitulo);
+  }
+}
+function copiarAlPortapapeles(url, titulo) {
+  navigator.clipboard.writeText(`📅 ${titulo}\n${url}`).then(() => {
+    mostrarNotificacion('✅ Link copiado al portapapeles', 'success');
+  }).catch(() => mostrarNotificacion('📋 Copiá este link: ' + url, 'info'));
+}
+
+// ============================================================
+// MODAL SEGUIMIENTO
+// ============================================================
+let _modalSeguimientoCallback = null;
+function mostrarModalSeguimiento(eventoId, eventoTitulo, fechaInicio) {
+  const overlay = document.getElementById('modalSeguimientoOverlay');
+  document.getElementById('modalSegEvento').textContent = '"' + eventoTitulo + '"';
+  document.getElementById('modalSegEmail').value = '';
+  overlay.classList.add('show');
+  setTimeout(() => document.getElementById('modalSegEmail').focus(), 350);
+  _modalSeguimientoCallback = { eventoId, eventoTitulo, fechaInicio };
+}
+function cerrarModalSeguimiento() {
+  document.getElementById('modalSeguimientoOverlay').classList.remove('show');
+  _modalSeguimientoCallback = null;
+}
+window.toggleSeguirEvento = function(eventoId, eventoTitulo, fechaInicio) {
+  if (isEventoSeguido(eventoId)) {
+    dejarDeSeguirEvento(eventoId);
+    actualizarBotonSeguimiento(eventoId, false);
+    mostrarNotificacion('🔕 Dejaste de seguir: ' + eventoTitulo, 'info');
+  } else {
+    if (fechaInicio) {
+      mostrarModalSeguimiento(eventoId, eventoTitulo, fechaInicio);
+    } else {
+      mostrarNotificacion('❌ Este evento no tiene fecha programada', 'error');
+    }
+  }
+};
+function actualizarBotonSeguimiento(eventoId, siguiendo) {
+  const btn = document.querySelector(`[data-evento-id="${eventoId}"] .btn-seguir`);
+  if (btn) {
+    btn.innerHTML = siguiendo ? '<i class="fas fa-bell"></i> Siguiendo' : '<i class="fas fa-bell"></i> Seguir';
+    btn.classList.toggle('siguiendo', siguiendo);
+  }
+}
+
+// ============================================================
+// NOTIFICACIÓN
+// ============================================================
+function mostrarNotificacion(mensaje, tipo='success') {
+  document.querySelectorAll('.notificacion-compartir').forEach(n => n.remove());
+  const notif = document.createElement('div');
+  notif.className = `notificacion-compartir notificacion-${tipo}`;
+  notif.textContent = mensaje;
+  document.body.appendChild(notif);
+  setTimeout(() => {
+    notif.classList.add('show');
+    setTimeout(() => {
+      notif.classList.remove('show');
+      setTimeout(() => notif.remove(), 400);
+    }, 3500);
+  }, 10);
+}
+
+// ============================================================
+// NAVEGACIÓN
+// ============================================================
+function initNavegacion() {
+  const sections = document.querySelectorAll('.section');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.mostrarSeccion = function(id) {
+    sections.forEach(s => s.classList.remove('section-active'));
+    const sec = document.getElementById(id);
+    if (sec) sec.classList.add('section-active');
+    navLinks.forEach(l => {
+      l.classList.remove('active');
+      if (l.getAttribute('href') === '#'+id) l.classList.add('active');
+    });
+    window.scrollTo({top:0,behavior:'smooth'});
+    const nav = document.getElementById('mainNav');
+    const ham = document.getElementById('hamburger');
+    if (nav.classList.contains('open')) { nav.classList.remove('open'); ham.classList.remove('open'); }
+  };
+  navLinks.forEach(l => {
+    l.addEventListener('click', function(e) {
+      e.preventDefault();
+      const sec = this.getAttribute('data-section') || this.getAttribute('href').replace('#','');
+      if (sec) window.mostrarSeccion(sec);
+    });
+  });
+  document.querySelectorAll('.nav-trigger').forEach(el => {
+    el.addEventListener('click', function(e) {
+      e.preventDefault();
+      const sec = this.getAttribute('data-section');
+      if (sec) window.mostrarSeccion(sec);
+    });
+  });
+}
+
+// ============================================================
+// DARK MODE
+// ============================================================
+function initDarkMode() {
+  const toggle = document.getElementById('darkToggle');
+  const html = document.documentElement;
+  const saved = localStorage.getItem('theme');
+  if (saved) html.setAttribute('data-theme', saved);
+  function updateIcon() {
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    toggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+  }
+  updateIcon();
+  toggle.addEventListener('click', () => {
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    updateIcon();
+  });
+}
+
+// ============================================================
+// HAMBURGER
+// ============================================================
+function initHamburger() {
+  const ham = document.getElementById('hamburger');
+  const nav = document.getElementById('mainNav');
+  ham.addEventListener('click', () => {
+    ham.classList.toggle('open');
+    nav.classList.toggle('open');
+  });
+}
+
+// ============================================================
+// FORMULARIO
+// ============================================================
+function initFormulario() {
+  const btn = document.getElementById('btnEnviar');
+  if (!btn) return;
+  btn.addEventListener('click', function() {
+    const nombre = document.getElementById('form-nombre').value.trim();
+    const email = document.getElementById('form-email').value.trim();
+    const mensaje = document.getElementById('form-mensaje').value.trim();
+    if (!nombre) { mostrarNotificacion('⚠️ Por favor ingresá tu nombre', 'error'); return; }
+    if (!email || !email.includes('@')) { mostrarNotificacion('⚠️ Email inválido', 'error'); return; }
+    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+    this.disabled = true;
+    setTimeout(() => {
+      mostrarNotificacion('✅ Mensaje enviado. ¡Gracias, ' + nombre + '!', 'success');
+      document.getElementById('form-nombre').value = '';
+      document.getElementById('form-email').value = '';
+      document.getElementById('form-mensaje').value = '';
+      this.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar mensaje';
+      this.disabled = false;
+    }, 1800);
+  });
+}
+
+// ============================================================
+// SCROLL TOP
+// ============================================================
+function initScrollTop() {
+  const btn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => btn.classList.toggle('visible', window.scrollY > 300));
+  btn.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+}
+
+// ============================================================
+// VERSO ROTATIVO
+// ============================================================
+const versosHero = [
+  '"Yo soy el camino, la verdad y la vida" — Juan 14:6',
+  '"El Señor es mi pastor; nada me faltará." — Salmo 23:1',
+  '"Todo lo puedo en Cristo que me fortalece." — Filipenses 4:13',
+  '"Porque de tal manera amó Dios al mundo..." — Juan 3:16',
+  '"Esfuérzate y sé valiente; el Señor va contigo." — Josué 1:9',
+];
+let versoIdx = 0;
+function initVersoRotativo() {
+  setInterval(() => {
+    versoIdx = (versoIdx + 1) % versosHero.length;
+    const el = document.getElementById('versoRotativo');
+    el.style.opacity = '0';
+    setTimeout(() => { el.textContent = versosHero[versoIdx]; el.style.opacity = '1'; }, 500);
+  }, 6000);
+}
+
+// ============================================================
+// PARTÍCULAS
+// ============================================================
+function lanzarParticulas(cantidad = 60) {
+  const colores = ['#e8714a','#2ba8a0','#f0ba30','#ffffff','#ff6b6b','#74c0fc'];
+  for (let i = 0; i < cantidad; i++) {
+    setTimeout(() => {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = Math.random() * 11 + 4;
+      p.style.cssText = `left:${Math.random()*100}vw;top:${Math.random()*-20}px;width:${size}px;height:${size}px;background:${colores[Math.floor(Math.random()*colores.length)]};animation-duration:${Math.random()*3+2}s;animation-delay:${Math.random()*0.5}s;opacity:${Math.random()*0.8+0.2};`;
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 5500);
+    }, i * 40);
+  }
+}
+
+// ============================================================
+// EMAILJS
+// ============================================================
+const EMAILJS_CONFIG = { PUBLIC_KEY:'8t7CaVy1RjdvKO2Nu', SERVICE_ID:'service_4ngsl5i', TEMPLATE_ID:'template_9koprsq' };
+function cargarEmailJS() {
+  return new Promise((res,rej) => {
+    const s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+    s.onload = () => { emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY); res(); };
+    s.onerror = rej;
+    document.head.appendChild(s);
+  });
+}
+async function enviarNotificacionEmail(email, datosEvento) {
+  if (typeof emailjs === 'undefined') return false;
+  try {
+    await emailjs.send(EMAILJS_CONFIG.SERVICE_ID, EMAILJS_CONFIG.TEMPLATE_ID, { email, nombre:email.split('@')[0], evento:datosEvento.titulo, lugar:datosEvento.lugar, horario:datosEvento.horario, reply_to:'cvvmultimedia@gmail.com' });
+    mostrarNotificacion(`📧 Notificación enviada a ${email}`, 'success');
+    return true;
+  } catch(err) { return false; }
+}
+async function verificarNotificaciones() {
+  if (typeof emailjs === 'undefined') return;
+  const ahora = new Date();
+  for (const id of Object.keys(eventosSeguidos)) {
+    const seg = eventosSeguidos[id];
+    if (!seg.fechaInicio) continue;
+    const fi = new Date(seg.fechaInicio);
+    const quinceAntes = new Date(fi.getTime() - 15*60*1000);
+    if (!seg.notificadoInicio && ahora >= quinceAntes && ahora < fi) {
+      const ok = await enviarNotificacionEmail(seg.email, seg);
+      if (ok) { seg.notificadoInicio = true; guardarSeguimientos(); }
+    }
+  }
+}
+
+// ============================================================
+// EASTER EGG
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelector('.logo-icon').addEventListener('click', function() {
+    lanzarParticulas(60);
+    mostrarNotificacion('✝ Gloria a Dios 🙌', 'success');
+  });
+});
+
+// ============================================================
+// MODAL SEGUIMIENTO — INIT
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('modalSegClose').addEventListener('click', cerrarModalSeguimiento);
+  document.getElementById('modalSegCancel').addEventListener('click', cerrarModalSeguimiento);
+  document.getElementById('modalSeguimientoOverlay').addEventListener('click', function(e) {
+    if (e.target === this) cerrarModalSeguimiento();
+  });
+  document.getElementById('modalSegConfirm').addEventListener('click', function() {
+    const email = document.getElementById('modalSegEmail').value.trim();
+    if (!email || !email.includes('@') || !email.includes('.')) {
+      document.getElementById('modalSegEmail').style.borderColor = '#e74c3c';
+      document.getElementById('modalSegEmail').focus();
+      return;
+    }
+    document.getElementById('modalSegEmail').style.borderColor = '';
+    if (_modalSeguimientoCallback) {
+      const { eventoId, eventoTitulo, fechaInicio } = _modalSeguimientoCallback;
+      seguirEvento(eventoId, eventoTitulo, fechaInicio, email);
+      cerrarModalSeguimiento();
+      actualizarBotonSeguimiento(eventoId, true);
+    }
+  });
+  document.getElementById('modalSegEmail').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') document.getElementById('modalSegConfirm').click();
+  });
+});
+
+// ============================================================
+// INIT
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+  initNavegacion();
+  initDarkMode();
+  initHamburger();
+  initFormulario();
+  initScrollTop();
+  initVersoRotativo();
+  initDevocional();
+  cargarEventos();
+  actualizarCountdown();
+  setInterval(actualizarCountdown, 1000);
+  setInterval(() => cargarEventos(), 60000);
+  cargarEmailJS().then(() => {
+    setInterval(verificarNotificaciones, 60000);
+    setTimeout(verificarNotificaciones, 2000);
+  }).catch(() => {});
+});
+
+window.addEventListener('popstate', destacarEventoDesdeUrl);
+</script>
 </body>
 </html>
-
