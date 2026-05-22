@@ -466,6 +466,77 @@ footer::before { content:''; position:absolute; inset:0; background:radial-gradi
   .redes-grid{grid-template-columns:1fr}
   .cd-next-row{display:none}
 }
+
+/* ---- MEJORAS ADICIONALES MOBILE ---- */
+body { overflow-x:hidden; }
+
+@media(max-width:768px){
+  /* Anuncio bar: texto no se desborde */
+  .anuncio-bar { padding:0.55rem 2.5rem 0.55rem 1rem; font-size:0.78rem; flex-wrap:wrap; gap:0.4rem; text-align:center; }
+  .anuncio-dot { display:none; }
+
+  /* Logo: texto más compacto */
+  .logo-text h1 { font-size:0.88rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:155px; }
+  .badge-ciudad { font-size:0.6rem; padding:0.1rem 0.5rem; }
+  .logo-area { min-width:0; flex:1; }
+  .header-flex { gap:0.5rem; }
+
+  /* Hero verse más pequeño */
+  .hero-verse { font-size:0.97rem; padding:0.8rem 1rem; }
+  .hero-eyebrow { font-size:0.7rem; padding:0.35rem 0.9rem; }
+  .hero-tags span { font-size:0.76rem; padding:0.25rem 0.75rem; }
+
+  /* Section header */
+  .section-header { padding-top:2.5rem; margin-bottom:2rem; }
+  .section-header h2 { font-size:1.9rem; }
+  .section-sub { font-size:0.95rem; }
+
+  /* Quiénes somos */
+  .img-overlay-badge { bottom:10px; right:10px; padding:0.7rem 1rem; font-size:0.78rem; }
+  .quienes-texto h3 { font-size:1.6rem; }
+
+  /* Stats */
+  .stat-num { font-size:2.2rem; }
+  .stat-divider { display:none; }
+
+  /* Horario items apilados correctamente */
+  .horario-item { width:100%; }
+
+  /* Event grid: una columna */
+  .event-grid { grid-template-columns:1fr; }
+
+  /* Contacto info cards */
+  .info-card { padding:1rem; }
+  .info-card p { font-size:0.9rem; }
+
+  /* Footer */
+  .footer-logo { font-size:1rem; }
+
+  /* Scroll top: alejado del borde */
+  .scroll-top { bottom:1.2rem; right:1rem; width:40px; height:40px; }
+
+  /* Modal seguimiento */
+  .modal-seguimiento-box { padding:1.8rem 1.4rem; }
+  .modal-seg-titulo { font-size:1.2rem; }
+  .modal-seg-btns { flex-direction:column; }
+  .modal-seg-cancel { order:2; }
+}
+
+@media(max-width:400px){
+  .logo-text h1 { font-size:0.82rem; }
+  .logo-container { width:36px; height:36px; }
+  .logo-icon { width:36px; height:36px; font-size:1.1rem; }
+  .section-header h2 { font-size:1.6rem; }
+  .tiempo-bloque { padding:0.6rem 0.6rem; min-width:50px; }
+  .tiempo-bloque span { font-size:1.35rem; }
+  .tiempo-sep { font-size:1.2rem; }
+  .countdown-card { padding:1.4rem 1rem 1.2rem; }
+  .cd-meeting-name { font-size:1.2rem; }
+  .btn-primary, .btn-secondary { font-size:0.88rem; padding:0.8rem 1.4rem; }
+  .devocional-content { padding:1.2rem; }
+  .versiculo-texto { font-size:1rem; }
+  .horario-block { padding:1.2rem; }
+}
   </style>
 </head>
 <body>
@@ -473,7 +544,7 @@ footer::before { content:''; position:absolute; inset:0; background:radial-gradi
 <!-- BARRA DE ANUNCIO -->
 <div class="anuncio-bar" id="anuncioBar">
   <span class="anuncio-dot"></span>
-  <span><i class="fas fa-church"></i> &nbsp;<strong id="proximo-label">cargando...</strong> · <span id="countdown-bar">--:--:--</span></span>
+  <span>✝ &nbsp;<strong id="proximo-label">cargando...</strong> · <span id="countdown-bar">--:--:--</span></span>
   <button class="anuncio-close" onclick="document.getElementById('anuncioBar').style.display='none'">×</button>
 </div>
 
