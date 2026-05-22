@@ -467,6 +467,169 @@ footer::before { content:''; position:absolute; inset:0; background:radial-gradi
   .cd-next-row{display:none}
 }
 
+/* ============================================================
+   GRUPOS
+   ============================================================ */
+.grupos-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1.8rem; }
+
+.grupo-card {
+  position:relative; border-radius:var(--radius-lg); overflow:hidden;
+  cursor:pointer; box-shadow:0 6px 28px var(--shadow);
+  border:1px solid var(--border);
+  transition:transform 0.28s, box-shadow 0.28s;
+  background:var(--white);
+}
+.grupo-card:hover { transform:translateY(-7px); box-shadow:0 22px 55px var(--shadow-lg); }
+
+.grupo-portada {
+  height:190px; background-size:cover; background-position:center;
+  position:relative;
+}
+.grupo-portada::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(0deg, rgba(9,30,46,0.75) 0%, rgba(9,30,46,0.18) 100%);
+}
+.grupo-badge-top {
+  position:absolute; top:12px; left:12px; z-index:2;
+  background:rgba(255,255,255,0.15); backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,0.25); color:white;
+  font-size:0.68rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+  padding:0.28rem 0.8rem; border-radius:30px;
+}
+.grupo-emoji { position:absolute; bottom:14px; left:16px; z-index:2; font-size:2rem; line-height:1; }
+
+.grupo-body { padding:1.3rem 1.4rem 1.5rem; }
+.grupo-body h3 { font-size:1.05rem; font-weight:800; margin-bottom:0.2rem; line-height:1.2; }
+.grupo-body .grupo-subtitulo { font-size:0.82rem; color:var(--coral); font-weight:700; letter-spacing:0.5px; margin-bottom:0.6rem; }
+.grupo-body p { font-size:0.88rem; color:var(--text-soft); line-height:1.55; margin-bottom:1rem; }
+.grupo-meta-row { display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:1rem; }
+.grupo-chip { display:flex; align-items:center; gap:0.3rem; background:var(--bg-alt); border:1px solid var(--border); color:var(--text-soft); font-size:0.75rem; font-weight:600; padding:0.25rem 0.7rem; border-radius:20px; }
+.grupo-chip i { color:var(--teal); font-size:0.7rem; }
+.btn-ver-grupo {
+  display:flex; align-items:center; justify-content:center; gap:0.5rem;
+  width:100%; padding:0.7rem; border-radius:12px; border:none;
+  background:linear-gradient(135deg,var(--coral),var(--coral-dark));
+  color:white; font-size:0.88rem; font-weight:700; cursor:pointer;
+  font-family:'Outfit',sans-serif; transition:all 0.22s;
+  letter-spacing:0.3px;
+}
+.btn-ver-grupo:hover { opacity:0.9; transform:translateY(-1px); }
+
+/* ---- VISTA INTERNA DEL GRUPO ---- */
+.grupo-vista { display:none; }
+.grupo-vista.activa { display:block; animation:fadeInUp 0.35s ease; }
+
+.grupo-hero {
+  height:280px; background-size:cover; background-position:center;
+  border-radius:var(--radius-lg); position:relative; overflow:hidden;
+  margin-bottom:2rem;
+  box-shadow:0 16px 50px var(--shadow-lg);
+}
+.grupo-hero::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(0deg, rgba(9,30,46,0.85) 0%, rgba(9,30,46,0.25) 60%, transparent 100%);
+}
+.grupo-hero-content {
+  position:absolute; bottom:0; left:0; right:0; padding:2rem 2rem 1.8rem;
+  z-index:2;
+}
+.grupo-hero-content .grupo-back {
+  display:inline-flex; align-items:center; gap:0.4rem;
+  color:rgba(255,255,255,0.7); font-size:0.82rem; font-weight:600;
+  cursor:pointer; background:rgba(255,255,255,0.1); border:none;
+  padding:0.35rem 0.9rem; border-radius:20px; margin-bottom:1rem;
+  transition:all 0.2s; letter-spacing:0.2px; font-family:'Outfit',sans-serif;
+}
+.grupo-back:hover { background:rgba(255,255,255,0.2); color:white; }
+.grupo-hero-emoji { font-size:2.6rem; display:block; margin-bottom:0.4rem; }
+.grupo-hero-content h2 { color:white; font-size:1.9rem; font-weight:800; line-height:1.1; margin-bottom:0.3rem; }
+.grupo-hero-content .grupo-hero-sub { color:var(--coral); font-size:0.9rem; font-weight:700; letter-spacing:0.8px; }
+
+.grupo-info-strip {
+  display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:2rem;
+}
+.grupo-info-pill {
+  display:flex; align-items:center; gap:0.5rem;
+  background:var(--white); border:1px solid var(--border);
+  border-radius:12px; padding:0.65rem 1.1rem;
+  font-size:0.85rem; font-weight:600; color:var(--text);
+  box-shadow:0 3px 12px var(--shadow);
+}
+.grupo-info-pill i { color:var(--coral); font-size:0.85rem; }
+.grupo-info-pill span.label { color:var(--text-soft); font-weight:400; margin-right:0.2rem; }
+
+/* Noticias / Novedades */
+.noticias-titulo {
+  display:flex; align-items:center; gap:0.6rem; margin-bottom:1.4rem;
+  font-size:1.25rem; font-family:'Playfair Display',serif; font-weight:800;
+}
+.noticias-titulo i { color:var(--coral); }
+
+.noticias-lista { display:flex; flex-direction:column; gap:1.2rem; }
+
+.noticia-card {
+  display:flex; gap:1.2rem; background:var(--white);
+  border:1px solid var(--border); border-radius:var(--radius);
+  padding:1.2rem 1.4rem; box-shadow:0 4px 16px var(--shadow);
+  transition:all 0.22s;
+}
+.noticia-card:hover { box-shadow:0 10px 32px var(--shadow-lg); transform:translateX(4px); }
+.noticia-icono {
+  width:46px; height:46px; border-radius:12px; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.3rem; background:linear-gradient(135deg,var(--teal-light),var(--bg-alt));
+}
+.noticia-cuerpo { flex:1; min-width:0; }
+.noticia-fecha { font-size:0.72rem; color:var(--text-soft); font-weight:600; letter-spacing:0.5px; text-transform:uppercase; margin-bottom:0.3rem; }
+.noticia-cuerpo h4 { font-size:0.98rem; font-weight:700; margin-bottom:0.35rem; line-height:1.3; }
+.noticia-cuerpo p { font-size:0.86rem; color:var(--text-soft); line-height:1.55; }
+.noticia-tag { display:inline-block; margin-top:0.5rem; font-size:0.7rem; font-weight:700; padding:0.18rem 0.65rem; border-radius:20px; letter-spacing:0.5px; text-transform:uppercase; }
+.tag-anuncio { background:rgba(240,186,48,0.15); color:var(--gold); border:1px solid rgba(240,186,48,0.3); }
+.tag-reunión { background:rgba(43,168,160,0.12); color:var(--teal); border:1px solid rgba(43,168,160,0.25); }
+.tag-especial { background:rgba(232,113,74,0.12); color:var(--coral); border:1px solid rgba(232,113,74,0.25); }
+.tag-devocional { background:rgba(240,186,48,0.1); color:var(--gold); border:1px solid rgba(240,186,48,0.2); }
+
+/* Datos importantes lateral */
+.grupo-layout { display:grid; grid-template-columns:1fr 300px; gap:2rem; align-items:start; }
+.datos-card {
+  background:var(--white); border:1px solid var(--border); border-radius:var(--radius-lg);
+  overflow:hidden; box-shadow:0 6px 24px var(--shadow); position:sticky; top:calc(var(--header-h) + 1.5rem);
+}
+.datos-card-header {
+  background:linear-gradient(135deg,var(--navy-deep),var(--teal));
+  padding:1.2rem 1.4rem; color:white;
+}
+.datos-card-header h4 { color:white; font-size:1rem; margin:0; display:flex; align-items:center; gap:0.5rem; }
+.datos-card-body { padding:1.2rem 1.4rem; }
+.dato-fila { display:flex; align-items:flex-start; gap:0.8rem; padding:0.7rem 0; border-bottom:1px solid var(--border); }
+.dato-fila:last-child { border-bottom:none; }
+.dato-icono { width:32px; height:32px; background:var(--bg-alt); border-radius:9px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.dato-icono i { color:var(--coral); font-size:0.82rem; }
+.dato-texto strong { display:block; font-size:0.78rem; color:var(--text-soft); font-weight:600; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:0.1rem; }
+.dato-texto span { font-size:0.9rem; color:var(--text); font-weight:500; }
+.btn-whatsapp-grupo {
+  display:flex; align-items:center; justify-content:center; gap:0.5rem;
+  width:100%; margin-top:1rem; padding:0.75rem; border-radius:12px;
+  background:#25d366; color:white; font-weight:700; font-size:0.9rem;
+  border:none; cursor:pointer; font-family:'Outfit',sans-serif; transition:all 0.2s;
+  text-decoration:none;
+}
+.btn-whatsapp-grupo:hover { background:#1fb85a; transform:translateY(-1px); }
+
+/* Responsive grupos */
+@media(max-width:900px){
+  .grupo-layout { grid-template-columns:1fr; }
+  .datos-card { position:static; }
+}
+@media(max-width:600px){
+  .grupo-hero { height:220px; }
+  .grupo-hero-content h2 { font-size:1.5rem; }
+  .grupo-info-strip { gap:0.6rem; }
+  .grupo-info-pill { font-size:0.8rem; padding:0.5rem 0.8rem; }
+  .noticia-card { flex-direction:column; gap:0.7rem; }
+  .noticia-icono { width:38px; height:38px; }
+}
+
 /* ---- MEJORAS ADICIONALES MOBILE ---- */
 body { overflow-x:hidden; }
 
@@ -568,6 +731,7 @@ body { overflow-x:hidden; }
       <a href="#inicio" class="nav-link active" data-section="inicio"><i class="fas fa-home"></i> Inicio</a>
       <a href="#reuniones" class="nav-link" data-section="reuniones"><i class="fas fa-calendar-alt"></i> Reuniones</a>
       <a href="#devocional" class="nav-link" data-section="devocional"><i class="fas fa-book-open"></i> Devocional</a>
+      <a href="#grupos" class="nav-link" data-section="grupos"><i class="fas fa-users"></i> Grupos</a>
       <a href="#redes" class="nav-link" data-section="redes"><i class="fas fa-share-alt"></i> Redes</a>
       <a href="#contacto" class="nav-link" data-section="contacto"><i class="fas fa-envelope"></i> Contacto</a>
       <button class="btn-dark-toggle" id="darkToggle" title="Modo oscuro"><i class="fas fa-moon"></i></button>
@@ -801,6 +965,289 @@ body { overflow-x:hidden; }
         </a>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ===== GRUPOS ===== -->
+<section id="grupos" class="section">
+  <div class="container">
+
+    <!-- VISTA PRINCIPAL: tarjetas de grupos -->
+    <div id="grupos-lista-view">
+      <div class="section-header">
+        <div class="seccion-etiqueta"><i class="fas fa-users"></i> Comunidad</div>
+        <h2>Grupos de la Iglesia</h2>
+        <p class="section-sub">Encontrá tu espacio. Cada grupo es una familia dentro de la gran familia.</p>
+      </div>
+      <div class="grupos-grid">
+
+        <!-- JÓVENES Y ADOLESCENTES -->
+        <div class="grupo-card" onclick="abrirGrupo('jovenes-conectados')">
+          <div class="grupo-portada" style="background-image:url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=400&fit=crop')">
+            <span class="grupo-badge-top">Activo</span>
+            <span class="grupo-emoji">🔥</span>
+          </div>
+          <div class="grupo-body">
+            <h3>Jóvenes y Adolescentes</h3>
+            <div class="grupo-subtitulo">"Conectados"</div>
+            <p>Un espacio para que los jóvenes puedan crecer en su fe, conectar con Dios y entre sí, con alabanza, Palabra y mucha comunidad.</p>
+            <div class="grupo-meta-row">
+              <span class="grupo-chip"><i class="fas fa-calendar-alt"></i> Viernes 21:00</span>
+              <span class="grupo-chip"><i class="fas fa-users"></i> 13–25 años</span>
+            </div>
+            <button class="btn-ver-grupo"><i class="fas fa-arrow-right"></i> Ver grupo</button>
+          </div>
+        </div>
+
+        <!-- CVV KIDS -->
+        <div class="grupo-card" onclick="abrirGrupo('cvv-kids')">
+          <div class="grupo-portada" style="background-image:url('https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=600&h=400&fit=crop')">
+            <span class="grupo-badge-top">Activo</span>
+            <span class="grupo-emoji">⭐</span>
+          </div>
+          <div class="grupo-body">
+            <h3>Escuela Bíblica</h3>
+            <div class="grupo-subtitulo">CVV Kids</div>
+            <p>Un lugar lleno de color, juegos y Palabra de Dios para que los más chicos crezcan amando a Jesús desde pequeños.</p>
+            <div class="grupo-meta-row">
+              <span class="grupo-chip"><i class="fas fa-calendar-alt"></i> Viernes 18:30</span>
+              <span class="grupo-chip"><i class="fas fa-child"></i> Hasta 12 años</span>
+            </div>
+            <button class="btn-ver-grupo"><i class="fas fa-arrow-right"></i> Ver grupo</button>
+          </div>
+        </div>
+
+        <!-- MATRIMONIOS -->
+        <div class="grupo-card" onclick="abrirGrupo('matrimonios')">
+          <div class="grupo-portada" style="background-image:url('https://images.unsplash.com/photo-1511895426328-dc8714191011?w=600&h=400&fit=crop')">
+            <span class="grupo-badge-top">Activo</span>
+            <span class="grupo-emoji">💍</span>
+          </div>
+          <div class="grupo-body">
+            <h3>Matrimonios</h3>
+            <div class="grupo-subtitulo">"Familias de Fe"</div>
+            <p>Un espacio de comunión y crecimiento para parejas que desean fortalecer su familia desde los valores del Reino de Dios.</p>
+            <div class="grupo-meta-row">
+              <span class="grupo-chip"><i class="fas fa-calendar-alt"></i> A confirmar</span>
+              <span class="grupo-chip"><i class="fas fa-heart"></i> Parejas</span>
+            </div>
+            <button class="btn-ver-grupo"><i class="fas fa-arrow-right"></i> Ver grupo</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- VISTA INTERNA — JÓVENES CONECTADOS -->
+    <div id="grupo-jovenes-conectados" class="grupo-vista">
+      <div class="grupo-hero" style="background-image:url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&h=500&fit=crop')">
+        <div class="grupo-hero-content">
+          <button class="grupo-back" onclick="volverGrupos()"><i class="fas fa-arrow-left"></i> Grupos</button>
+          <span class="grupo-hero-emoji">🔥</span>
+          <h2>Jóvenes y Adolescentes</h2>
+          <div class="grupo-hero-sub">"CONECTADOS" · CVV ALVEAR</div>
+        </div>
+      </div>
+
+      <div class="grupo-info-strip">
+        <div class="grupo-info-pill"><i class="fas fa-calendar-alt"></i><span class="label">Cuándo:</span> Viernes 21:00 hs</div>
+        <div class="grupo-info-pill"><i class="fas fa-map-pin"></i><span class="label">Dónde:</span> Rio Mendoza 554</div>
+        <div class="grupo-info-pill"><i class="fas fa-users"></i><span class="label">Edad:</span> 13 a 25 años</div>
+        <div class="grupo-info-pill"><i class="fas fa-user-tie"></i><span class="label">Líder:</span> Equipo de Jóvenes</div>
+      </div>
+
+      <div class="grupo-layout">
+        <!-- Noticias / Novedades -->
+        <div>
+          <div class="noticias-titulo"><i class="fas fa-bolt"></i> Novedades del Grupo</div>
+          <div class="noticias-lista">
+
+            <div class="noticia-card">
+              <div class="noticia-icono">📣</div>
+              <div class="noticia-cuerpo">
+                <div class="noticia-fecha">Esta semana</div>
+                <h4>¡Reunión normal este Viernes!</h4>
+                <p>Este viernes nos encontramos como siempre a las 21:00 hs. Habrá alabanza, mensaje y al final queda el momento de comunión. ¡Traé a un amigo!</p>
+                <span class="noticia-tag tag-reunión">Reunión</span>
+              </div>
+            </div>
+
+            <div class="noticia-card">
+              <div class="noticia-icono">🏕️</div>
+              <div class="noticia-cuerpo">
+                <div class="noticia-fecha">Próximamente</div>
+                <h4>Congreso Nacional de Jóvenes Corodoba 2026</h4>
+                <p>Se viene el Congreso Nacional de Jovenes. Ya estamos organizando todo para que sea una experiencia increíble. Más info muy pronto. ¡Empezá a preparar las valijas! 😄</p>
+                <span class="noticia-tag tag-especial">Evento Especial</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Datos importantes -->
+        <div>
+          <div class="datos-card">
+            <div class="datos-card-header">
+              <h4><i class="fas fa-info-circle"></i> Datos importantes</h4>
+            </div>
+            <div class="datos-card-body">
+              <div class="dato-fila">
+                <div class="dato-icono"><i class="fas fa-clock"></i></div>
+                <div class="dato-texto"><strong>Horario</strong><span>Viernes de 21:00 a 23:00 hs</span></div>
+              </div>
+              <div class="dato-fila">
+                <div class="dato-icono"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="dato-texto"><strong>Lugar</strong><span>Rio Mendoza 554, Gral. Alvear</span></div>
+              </div>
+              <div class="dato-fila">
+                <div class="dato-icono"><i class="fas fa-users"></i></div>
+                <div class="dato-texto"><strong>Edad</strong><span>Adolescentes y jóvenes (13 a 25 años)</span></div>
+              </div>
+              <div class="dato-fila">
+                <div class="dato-icono"><i class="fas fa-star"></i></div>
+                <div class="dato-texto"><strong>Dinámica</strong><span>Alabanza · Mensaje · Juegos · Comunidad</span></div>
+              </div>
+              <div class="dato-fila">
+                <div class="dato-icono"><i class="fas fa-mug-hot"></i></div>
+                <div class="dato-texto"><strong>Llevá</strong><span>Tu mate 🧉, tu Biblia y buena onda</span></div>
+              </div>
+              <div class="dato-fila">
+                <div class="dato-icono"><i class="fas fa-door-open"></i></div>
+                <div class="dato-texto"><strong>Entrada</strong><span>Libre y gratuita. ¡Todos son bienvenidos!</span></div>
+              </div>
+              <a href="https://wa.me/542625597432?text=Hola!%20Quiero%20info%20sobre%20el%20grupo%20de%20j%C3%B3venes%20Conectados%20🔥" target="_blank" class="btn-whatsapp-grupo">
+                <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VISTA INTERNA — CVV KIDS -->
+    <div id="grupo-cvv-kids" class="grupo-vista">
+      <div class="grupo-hero" style="background-image:url('https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=1200&h=500&fit=crop')">
+        <div class="grupo-hero-content">
+          <button class="grupo-back" onclick="volverGrupos()"><i class="fas fa-arrow-left"></i> Grupos</button>
+          <span class="grupo-hero-emoji">⭐</span>
+          <h2>Escuela Bíblica</h2>
+          <div class="grupo-hero-sub">CVV KIDS · CVV ALVEAR</div>
+        </div>
+      </div>
+      <div class="grupo-info-strip">
+        <div class="grupo-info-pill"><i class="fas fa-calendar-alt"></i><span class="label">Cuándo:</span> Viernes 18:30 hs</div>
+        <div class="grupo-info-pill"><i class="fas fa-map-pin"></i><span class="label">Dónde:</span> Rio Mendoza 554</div>
+        <div class="grupo-info-pill"><i class="fas fa-child"></i><span class="label">Edad:</span> Hasta 12 años</div>
+      </div>
+      <div class="grupo-layout">
+        <div>
+          <div class="noticias-titulo"><i class="fas fa-bolt"></i> Novedades del Grupo</div>
+          <div class="noticias-lista">
+            <div class="noticia-card">
+              <div class="noticia-icono">🎨</div>
+              <div class="noticia-cuerpo">
+                <div class="noticia-fecha">Esta semana</div>
+                <h4>¡Clases con actividades especiales!</h4>
+                <p>Este viernes hay actividades de manualidades sobre la historia de Noé. ¡Los nenes van a pasarla genial! Llegan a las 18:30 hs.</p>
+                <span class="noticia-tag tag-reunión">Reunión</span>
+              </div>
+            </div>
+            <div class="noticia-card">
+              <div class="noticia-icono">📚</div>
+              <div class="noticia-cuerpo">
+                <div class="noticia-fecha">Tema del mes</div>
+                <h4>El amor de Dios para los niños</h4>
+                <p>Durante mayo estamos enseñando sobre el amor incondicional de Dios a través de historias bíblicas y juegos interactivos.</p>
+                <span class="noticia-tag tag-devocional">Serie</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="datos-card">
+            <div class="datos-card-header">
+              <h4><i class="fas fa-info-circle"></i> Datos importantes</h4>
+            </div>
+            <div class="datos-card-body">
+              <div class="dato-fila">
+                <div class="dato-icono"><i class="fas fa-clock"></i></div>
+                <div class="dato-texto"><strong>Horario</strong><span>Viernes de 18:30 a 20:00 hs</span></div>
+              </div>
+              <div class="dato-fila">
+                <div class="dato-icono"><i class="fas fa-child"></i></div>
+                <div class="dato-texto"><strong>Edad</strong><span>Niños hasta 12 años</span></div>
+              </div>
+              <div class="dato-fila">
+                <div class="dato-icono"><i class="fas fa-star"></i></div>
+                <div class="dato-texto"><strong>Dinámica</strong><span>Historias bíblicas · Manualidades · Juegos</span></div>
+              </div>
+              <div class="dato-fila">
+                <div class="dato-icono"><i class="fas fa-door-open"></i></div>
+                <div class="dato-texto"><strong>Entrada</strong><span>Libre y gratuita</span></div>
+              </div>
+              <a href="https://wa.me/542625597432?text=Hola!%20Quiero%20info%20sobre%20CVV%20Kids%20⭐" target="_blank" class="btn-whatsapp-grupo">
+                <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VISTA INTERNA — MATRIMONIOS -->
+    <div id="grupo-matrimonios" class="grupo-vista">
+      <div class="grupo-hero" style="background-image:url('https://images.unsplash.com/photo-1511895426328-dc8714191011?w=1200&h=500&fit=crop')">
+        <div class="grupo-hero-content">
+          <button class="grupo-back" onclick="volverGrupos()"><i class="fas fa-arrow-left"></i> Grupos</button>
+          <span class="grupo-hero-emoji">💍</span>
+          <h2>Matrimonios</h2>
+          <div class="grupo-hero-sub">FAMILIAS DE FE · CVV ALVEAR</div>
+        </div>
+      </div>
+      <div class="grupo-info-strip">
+        <div class="grupo-info-pill"><i class="fas fa-calendar-alt"></i><span class="label">Cuándo:</span> A confirmar</div>
+        <div class="grupo-info-pill"><i class="fas fa-map-pin"></i><span class="label">Dónde:</span> Rio Mendoza 554</div>
+        <div class="grupo-info-pill"><i class="fas fa-heart"></i><span class="label">Para:</span> Parejas casadas</div>
+      </div>
+      <div class="grupo-layout">
+        <div>
+          <div class="noticias-titulo"><i class="fas fa-bolt"></i> Novedades del Grupo</div>
+          <div class="noticias-lista">
+            <div class="noticia-card">
+              <div class="noticia-icono">📋</div>
+              <div class="noticia-cuerpo">
+                <div class="noticia-fecha">Próximamente</div>
+                <h4>Primer encuentro de matrimonios 2026</h4>
+                <p>Estamos organizando el primer encuentro del año. Fecha y horario a confirmar. Si sos parte del grupo, estate atento a los anuncios.</p>
+                <span class="noticia-tag tag-anuncio">Anuncio</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="datos-card">
+            <div class="datos-card-header">
+              <h4><i class="fas fa-info-circle"></i> Datos importantes</h4>
+            </div>
+            <div class="datos-card-body">
+              <div class="dato-fila">
+                <div class="dato-icono"><i class="fas fa-heart"></i></div>
+                <div class="dato-texto"><strong>Para quién</strong><span>Parejas casadas o de novios</span></div>
+              </div>
+              <div class="dato-fila">
+                <div class="dato-icono"><i class="fas fa-clock"></i></div>
+                <div class="dato-texto"><strong>Frecuencia</strong><span>A confirmar</span></div>
+              </div>
+              <a href="https://wa.me/542625597432?text=Hola!%20Quiero%20info%20sobre%20el%20grupo%20de%20Matrimonios%20💍" target="_blank" class="btn-whatsapp-grupo">
+                <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1670,6 +2117,43 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 window.addEventListener('popstate', destacarEventoDesdeUrl);
+
+// ============================================================
+// GRUPOS — NAVEGACIÓN INTERNA
+// ============================================================
+window.abrirGrupo = function(grupoId) {
+  // Ocultar lista de grupos
+  document.getElementById('grupos-lista-view').style.display = 'none';
+  // Ocultar todas las vistas de grupo
+  document.querySelectorAll('.grupo-vista').forEach(v => v.classList.remove('activa'));
+  // Mostrar la vista del grupo seleccionado
+  const vista = document.getElementById('grupo-' + grupoId);
+  if (vista) {
+    vista.classList.add('activa');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+};
+
+window.volverGrupos = function() {
+  document.querySelectorAll('.grupo-vista').forEach(v => v.classList.remove('activa'));
+  document.getElementById('grupos-lista-view').style.display = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+// Resetear vista de grupos al cambiar de sección
+const _origMostrarSeccion = window.mostrarSeccion;
+document.addEventListener('DOMContentLoaded', function() {
+  const _orig = window.mostrarSeccion;
+  window.mostrarSeccion = function(id) {
+    if (id !== 'grupos') {
+      // Resetear vista interna al salir
+      document.querySelectorAll('.grupo-vista').forEach(v => v.classList.remove('activa'));
+      const lista = document.getElementById('grupos-lista-view');
+      if (lista) lista.style.display = '';
+    }
+    _orig(id);
+  };
+});
 </script>
 </body>
 </html>
